@@ -13,7 +13,7 @@ export function Navbar() {
     <header className="sticky top-0 z-50 border-b-2 border-ink-900 bg-white/90 backdrop-blur">
       <nav
         aria-label="Navigasi utama"
-        className="gd-container flex h-16 items-center justify-between gap-3"
+        className="gd-container flex h-[4.5rem] items-center justify-between gap-3"
       >
         <Link href="/" aria-label="GoDiand, kembali ke beranda">
           <Logo preload variant="capsule" />

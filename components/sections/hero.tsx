@@ -6,7 +6,7 @@ import { HeroStoreButtons } from "@/components/store-badges";
 
 export function Hero() {
   return (
-    <section className="relative overflow-hidden border-b-2 border-ink-900 bg-brand-100">
+    <section className="relative overflow-x-clip border-b-2 border-ink-900 bg-brand-100">
       <div
         aria-hidden="true"
         className="gd-dots absolute inset-0 opacity-70"
