@@ -1,0 +1,387 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+
+  /* Warna utama Godiand */
+  --color-brand-50: #eef8ff;
+  --color-brand-100: #dceffb;
+  --color-brand-200: #b7e0f7;
+  --color-brand-300: #83ccef;
+  --color-brand-400: #45afe2;
+  --color-brand-500: #1a91cc;
+  --color-brand-600: #0a78b5;
+  --color-brand-700: #095f91;
+  --color-brand-800: #0b4f77;
+  --color-brand-900: #0d435f;
+  --color-brand-950: #082b3e;
+
+  --color-ink-900: #0b1c26;
+  --color-ink-800: #142e3a;
+  --color-ink-700: #2a4450;
+  --color-ink-600: #4d6672;
+  --color-ink-500: #708995;
+
+  --color-sun-50: #fff8e1;
+  --color-sun-100: #ffefb8;
+  --color-sun-300: #ffdf80;
+  --color-sun-400: #ffd04d;
+  --color-sun-500: #ffc531;
+  --color-sun-600: #e8a90c;
+
+  --color-mint-50: #e8f8f2;
+  --color-mint-100: #c9f0e5;
+  --color-mint-600: #0e9f7e;
+  --color-mint-700: #077a60;
+
+  --color-coral-50: #ffefe9;
+  --color-coral-100: #ffdcd1;
+  --color-coral-600: #e4552f;
+  --color-coral-700: #b93f20;
+
+  --color-grape-50: #f2edff;
+  --color-grape-100: #e4dbff;
+  --color-grape-600: #6b4ee6;
+  --color-grape-700: #5438c7;
+
+  --color-mist: #f1f7fb;
+
+  --shadow-gd: 4px 4px 0 var(--color-ink-900);
+  --shadow-gd-lg: 6px 6px 0 var(--color-ink-900);
+  --shadow-gd-sun: 5px 5px 0 var(--color-sun-400);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-mist);
+    color: var(--color-ink-900);
+  }
+
+  ::selection {
+    background-color: var(--color-sun-400);
+    color: var(--color-ink-900);
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--color-brand-500);
+    outline-offset: 3px;
+  }
+}
+
+@layer components {
+  .gd-container {
+    margin-inline: auto;
+    width: 100%;
+    max-width: 72rem;
+    padding-inline: 1rem;
+  }
+
+  .gd-card {
+    border: 2px solid var(--color-ink-900);
+    border-radius: 1rem;
+    background-color: #fff;
+    box-shadow: var(--shadow-gd);
+  }
+
+  .gd-lift {
+    transition:
+      transform 0.22s ease,
+      box-shadow 0.22s ease;
+  }
+
+  .gd-lift:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: var(--shadow-gd-lg);
+  }
+
+  .gd-label {
+    display: inline-block;
+    transform: rotate(-2deg);
+    border: 2px solid var(--color-ink-900);
+    border-radius: 0.55rem;
+    background-color: var(--color-sun-400);
+    padding: 0.25rem 0.75rem;
+    color: var(--color-ink-900);
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  .gd-mark {
+    padding-inline: 0.12em;
+    background-image: linear-gradient(
+      transparent 58%,
+      var(--color-sun-400) 58%,
+      var(--color-sun-400) 94%,
+      transparent 94%
+    );
+  }
+
+  .gd-btn {
+    display: inline-flex;
+    min-height: 3rem;
+    align-items: center;
+    justify-content: center;
+    gap: 0.55rem;
+    border: 2px solid var(--color-ink-900);
+    border-radius: 0.85rem;
+    padding-inline: 1.15rem;
+    font-weight: 800;
+    line-height: 1.1;
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease,
+      background-color 0.2s ease;
+  }
+
+  .gd-btn-primary {
+    background-color: var(--color-brand-600);
+    color: #fff;
+    box-shadow: var(--shadow-gd);
+  }
+
+  .gd-btn-primary:hover {
+    background-color: var(--color-brand-700);
+    transform: translate(-2px, -2px);
+    box-shadow: var(--shadow-gd-lg);
+  }
+
+  .gd-btn-sun {
+    background-color: var(--color-sun-400);
+    color: var(--color-ink-900);
+    box-shadow: var(--shadow-gd);
+  }
+
+  .gd-btn-sun:hover {
+    background-color: var(--color-sun-500);
+    transform: translate(-2px, -2px);
+    box-shadow: var(--shadow-gd-lg);
+  }
+
+  .gd-btn-dark {
+    background-color: var(--color-ink-900);
+    color: #fff;
+    box-shadow: var(--shadow-gd);
+  }
+
+  .gd-btn-dark:hover {
+    background-color: var(--color-ink-800);
+    transform: translate(-2px, -2px);
+    box-shadow: var(--shadow-gd-lg);
+  }
+
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .legal-prose {
+    color: var(--color-ink-700);
+    line-height: 1.75;
+  }
+
+  .legal-prose h2 {
+    margin-top: 2rem;
+    margin-bottom: 0.5rem;
+    color: var(--color-ink-900);
+    font-size: 1.2rem;
+    font-weight: 800;
+    line-height: 1.35;
+  }
+
+  .legal-prose p,
+  .legal-prose ul {
+    margin-bottom: 1rem;
+    font-size: 0.975rem;
+  }
+
+  .legal-prose ul {
+    display: grid;
+    gap: 0.4rem;
+    list-style: disc;
+    padding-left: 1.25rem;
+  }
+
+  .legal-prose a {
+    color: var(--color-brand-700);
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+}
+
+/* Animasi masuk untuk elemen hero */
+@keyframes gd-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.gd-up {
+  animation: gd-up 0.8s cubic-bezier(0.2, 0.7, 0.3, 1) both;
+  animation-delay: var(--d, 0ms);
+}
+
+/* Ticker berjalan */
+@keyframes gd-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.gd-marquee {
+  animation: gd-marquee 32s linear infinite;
+}
+
+/* Lencana bundar di hero */
+@keyframes gd-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.gd-badge-ring {
+  animation: gd-spin 30s linear infinite;
+  will-change: transform;
+}
+
+.gd-badge-logo {
+  transition: transform 0.35s cubic-bezier(0.2, 0.7, 0.3, 1);
+}
+
+.gd-badge:hover .gd-badge-logo {
+  transform: rotate(4deg) scale(1.06);
+}
+
+@keyframes gd-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(var(--bob, -8px));
+  }
+}
+
+.gd-bob {
+  animation: gd-bob 5.4s ease-in-out infinite;
+}
+
+@keyframes gd-road {
+  to {
+    transform: translateX(-5rem);
+  }
+}
+
+.gd-road-dash {
+  background-image: repeating-linear-gradient(
+    90deg,
+    var(--color-sun-400) 0 2.75rem,
+    transparent 2.75rem 5rem
+  );
+  animation: gd-road 1.1s linear infinite;
+}
+
+@keyframes gd-ride {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-1deg);
+  }
+  50% {
+    transform: translateY(-3px) rotate(1deg);
+  }
+}
+
+.gd-ride {
+  animation: gd-ride 0.6s ease-in-out infinite;
+}
+
+/* Dekorasi */
+.gd-dots {
+  background-image: radial-gradient(
+    var(--color-brand-300) 1.2px,
+    transparent 1.2px
+  );
+  background-size: 18px 18px;
+}
+
+@keyframes gd-float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(2deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(2deg);
+  }
+}
+
+.gd-float {
+  animation: gd-float 6.5s ease-in-out infinite;
+}
+
+/* Reveal saat scroll: kelas awal dipasang lewat JS agar konten tetap
+   terlihat bila JavaScript tidak berjalan. */
+.gd-reveal-init {
+  opacity: 0;
+  transform: translateY(22px);
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s cubic-bezier(0.2, 0.7, 0.3, 1);
+  transition-delay: var(--d, 0ms);
+}
+
+.gd-reveal-init.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .gd-up,
+  .gd-marquee,
+  .gd-float,
+  .gd-badge-ring,
+  .gd-bob,
+  .gd-road-dash,
+  .gd-ride {
+    animation: none !important;
+  }
+
+  .gd-badge-logo {
+    transition: none;
+  }
+
+  .gd-badge:hover .gd-badge-logo {
+    transform: none;
+  }
+
+  .gd-reveal-init {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .gd-lift:hover,
+  .gd-btn:hover {
+    transform: none;
+  }
+}

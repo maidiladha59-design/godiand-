@@ -1,0 +1,24 @@
+import { Stack } from "expo-router";
+import { StatusBar } from "expo-status-bar";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+import { DriverProvider } from "@/lib/driver";
+import { SessionProvider } from "@/lib/session";
+import { colors } from "@/lib/theme";
+
+export default function RootLayout() {
+  return (
+    <SafeAreaProvider>
+      <SessionProvider>
+        <DriverProvider>
+          <StatusBar style="dark" />
+          <Stack
+            screenOptions={{
+              headerShown: false,
+              contentStyle: { backgroundColor: colors.mist },
+            }}
+          />
+        </DriverProvider>
+      </SessionProvider>
+    </SafeAreaProvider>
+  );
+}
