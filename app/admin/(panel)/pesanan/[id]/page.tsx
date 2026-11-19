@@ -1,6 +1,12 @@
+import type { Metadata } from "next";
 import { Suspense } from "react";
 import { AdminOrderDetail } from "@/components/admin/order-detail";
 import { LoadingState } from "@/components/admin/ui";
+
+export const metadata: Metadata = {
+  title: { absolute: "Detail Pesanan | Admin Godiand" },
+  robots: { index: false, follow: false, noarchive: true },
+};
 
 async function OrderDetailContent({
   params,

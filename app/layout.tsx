@@ -33,7 +33,6 @@ export const metadata: Metadata = {
   creator: site.name,
   publisher: site.name,
   category: "transportation",
-  alternates: { canonical: "/" },
   robots: {
     index: true,
     follow: true,
@@ -43,14 +42,6 @@ export const metadata: Metadata = {
       "max-image-preview": "large",
       "max-snippet": -1,
     },
-  },
-  openGraph: {
-    type: "website",
-    locale: "id_ID",
-    url: "/",
-    siteName: site.name,
-    title: defaultTitle,
-    description: site.description,
   },
   twitter: {
     card: "summary_large_image",
