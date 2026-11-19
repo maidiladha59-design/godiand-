@@ -321,6 +321,21 @@
   background-size: 18px 18px;
 }
 
+/* Garis peta meliuk pelan di latar hero */
+@keyframes gd-drift {
+  from {
+    transform: translate3d(-10px, 6px, 0);
+  }
+  to {
+    transform: translate3d(10px, -6px, 0);
+  }
+}
+
+.gd-drift {
+  animation: gd-drift 22s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
 @keyframes gd-float {
   0%,
   100% {
@@ -361,6 +376,7 @@
   .gd-float,
   .gd-badge-ring,
   .gd-bob,
+  .gd-drift,
   .gd-road-dash,
   .gd-ride {
     animation: none !important;

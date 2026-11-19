@@ -23,9 +23,10 @@ const chips: HeroChip[] = [
   {
     label: "Mulai Rp9.000",
     icon: "star",
-    position: "left-0 top-[2%]",
+    position: "left-[1%] top-[4%]",
     tone: "bg-sun-400 text-ink-900",
-    tilt: "-rotate-6",
+    tilt: "-rotate-[4deg]",
+    iconClass: "fill-current",
     distance: "-7px",
     duration: "4.8s",
     delay: "-0.4s",
@@ -33,9 +34,9 @@ const chips: HeroChip[] = [
   {
     label: "Tunai / QRIS",
     icon: "wallet",
-    position: "right-0 top-[5%]",
-    tone: "bg-[#ff9d45] text-ink-900",
-    tilt: "rotate-5",
+    position: "right-[1%] top-[11%]",
+    tone: "bg-coral-600 text-white",
+    tilt: "rotate-3",
     distance: "-9px",
     duration: "6.1s",
     delay: "-2.2s",
@@ -43,9 +44,9 @@ const chips: HeroChip[] = [
   {
     label: "6 layanan",
     icon: "sparkles",
-    position: "left-[2%] bottom-[2%]",
+    position: "left-[2%] bottom-[8%]",
     tone: "bg-mint-600 text-white",
-    tilt: "rotate-4",
+    tilt: "rotate-2",
     distance: "-8px",
     duration: "5.5s",
     delay: "-3.1s",
@@ -53,9 +54,9 @@ const chips: HeroChip[] = [
   {
     label: "Ada tombol SOS",
     icon: "shield",
-    position: "right-0 bottom-[2%]",
+    position: "right-[1%] bottom-[4%]",
     tone: "bg-white text-ink-900",
-    tilt: "-rotate-5",
+    tilt: "-rotate-3",
     iconClass: "text-coral-600",
     distance: "-10px",
     duration: "6.8s",
@@ -65,12 +66,12 @@ const chips: HeroChip[] = [
 
 export function HeroBadge() {
   return (
-    <div className="relative mx-auto aspect-square w-full max-w-[24rem] sm:max-w-[26rem]">
-      <div className="absolute inset-0 grid place-items-center">
-        <div className="gd-badge relative aspect-square w-[80%] rounded-full border-4 border-ink-900 bg-white shadow-gd-lg">
+    <div className="relative mx-auto aspect-square w-full max-w-[24rem] sm:max-w-[27rem] lg:max-w-[30rem]">
+      <div className="absolute inset-0 grid scale-[1.18] place-items-center sm:scale-100">
+        <div className="gd-badge relative aspect-square w-[96%] rounded-full border-[5px] border-ink-900 bg-white shadow-[0_10px_0_#0b1c26]">
           <div
             aria-hidden="true"
-            className="absolute inset-[18%] rounded-full border-[3px] border-ink-900 bg-sun-400"
+            className="absolute inset-[16%] rounded-full border-4 border-ink-900 bg-sun-400 shadow-[inset_0_-6px_0_rgba(11,28,38,0.16)]"
           />
 
           <div
@@ -86,14 +87,14 @@ export function HeroBadge() {
               </defs>
               <text
                 fill="#0b1c26"
-                fontSize="17.5"
-                fontWeight="800"
-                letterSpacing="1.1"
+                fontSize="20"
+                fontWeight="900"
+                letterSpacing="1.2"
               >
                 <textPath
                   href="#gd-badge-text-path"
                   startOffset="0"
-                  textLength="940"
+                  textLength="960"
                   lengthAdjust="spacing"
                 >
                   {ringText}
@@ -103,7 +104,7 @@ export function HeroBadge() {
           </div>
 
           <div className="absolute inset-0 grid place-items-center">
-            <div className="gd-badge-logo w-[44%]">
+            <div className="gd-badge-logo w-[48%] drop-shadow-[0_5px_0_#0b1c26]">
               <Image
                 src="/logo.png"
                 alt="GoDiand"
@@ -131,11 +132,11 @@ export function HeroBadge() {
             }
           >
             <span
-              className={`inline-flex items-center gap-1.5 whitespace-nowrap rounded-xl border-2 border-ink-900 px-3 py-2 text-[12px] font-extrabold shadow-gd sm:text-[13px] ${chip.tone} ${chip.tilt}`}
+              className={`inline-flex items-center gap-2 whitespace-nowrap rounded-xl border-2 border-ink-900 px-3.5 py-2.5 text-[13px] font-extrabold shadow-[3px_3px_0_#0b1c26] sm:text-sm ${chip.tone} ${chip.tilt}`}
             >
               <Icon
                 name={chip.icon}
-                size={16}
+                size={17}
                 strokeWidth={2.4}
                 className={chip.iconClass}
               />

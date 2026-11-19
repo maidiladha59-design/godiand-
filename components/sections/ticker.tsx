@@ -1,24 +1,30 @@
 import { Icon } from "@/components/icons";
 
-const words = [
-  "GODIANDRIDE",
-  "GODIANDSEND",
-  "GODIANDFOOD",
-  "GODIANDLAUNDRY",
-  "GODIANDTITIP",
-  "GODIANDMART",
+const facts = [
+  "MULAI RP9.000",
+  "6 LAYANAN",
+  "TARIF JELAS",
+  "DRIVER LOKAL",
+  "BANDA ACEH",
+  "TUNAI / QRIS",
+  "ADA TOMBOL SOS",
 ];
 
 function TickerGroup() {
   return (
     <div className="flex shrink-0 items-center">
-      {words.map((word) => (
+      {facts.map((fact) => (
         <span
-          key={word}
-          className="flex items-center gap-5 pr-5 text-lg font-extrabold uppercase tracking-wide sm:text-xl"
+          key={fact}
+          className="flex items-center gap-4 pr-4 text-[13px] font-extrabold uppercase tracking-[0.12em] sm:text-sm"
         >
-          {word}
-          <Icon name="sparkles" size={18} strokeWidth={2.4} className="shrink-0" />
+          {fact}
+          <Icon
+            name="star"
+            size={14}
+            strokeWidth={2.2}
+            className="shrink-0 fill-current"
+          />
         </span>
       ))}
     </div>
@@ -28,13 +34,13 @@ function TickerGroup() {
 export function Ticker() {
   return (
     <section
-      aria-label="Layanan GoDiand"
-      className="relative z-10 overflow-hidden py-4 sm:py-5"
+      aria-label="Fakta GoDiand"
+      className="relative z-10 overflow-hidden"
     >
-      <div className="relative -ml-[2%] w-[104%] -rotate-1 border-y-4 border-ink-900 bg-sun-400 py-3.5">
+      <div className="relative -ml-[2%] w-[104%] -rotate-1 border-y-2 border-ink-900 bg-sun-400 py-2 sm:py-2.5">
         <p className="sr-only">
-          GoDiandRide, GoDiandSend, GoDiandFood, GoDiandLaundry, GoDiandTitip,
-          dan GoDiandMart.
+          Mulai Rp9.000, enam layanan, tarif jelas, driver lokal Banda Aceh,
+          bayar tunai atau QRIS, dan ada tombol SOS.
         </p>
         <div aria-hidden="true" className="gd-marquee flex w-max">
           <TickerGroup />
