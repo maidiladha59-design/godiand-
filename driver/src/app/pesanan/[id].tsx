@@ -227,8 +227,10 @@ function DriverOrderContent({
   }
 
   const isMine = order.driver_id === driverId;
+  const awaitingDriver =
+    order.status === "pending" || order.status === "mencari_driver";
   const canAccept =
-    order.status === "pending" &&
+    awaitingDriver &&
     order.driver_id === null &&
     driverStatus === "available";
   const isActive = isMine && isDriverActiveStatus(order.status);
@@ -303,7 +305,7 @@ function DriverOrderContent({
               value={formatRupiah(order.items_total)}
             />
           </>
-        ) : order.status === "pending" ? (
+        ) : awaitingDriver ? (
           <InfoNote message="Rincian menu dan chat pelanggan terbuka setelah pesanan diambil." />
         ) : null}
 
@@ -339,7 +341,7 @@ function DriverOrderContent({
         </Card>
       ) : null}
 
-      {order.status === "pending" && order.driver_id === null && !canAccept ? (
+      {awaitingDriver && order.driver_id === null && !canAccept ? (
         <InfoNote
           message={
             driverStatus === "offline"

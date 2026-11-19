@@ -12,6 +12,23 @@ const nextConfig: NextConfig = {
       },
     },
   },
+  async headers() {
+    return [
+      {
+        source: "/godiand.apk",
+        headers: [
+          {
+            key: "Content-Type",
+            value: "application/vnd.android.package-archive",
+          },
+          {
+            key: "Content-Disposition",
+            value: 'attachment; filename="godiand.apk"',
+          },
+        ],
+      },
+    ];
+  },
 };
 
 export default nextConfig;

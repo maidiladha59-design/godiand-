@@ -176,7 +176,7 @@ export function LoginForm() {
           <div className="flex items-start justify-between gap-4">
             <div>
               <p className="text-[11px] font-extrabold uppercase tracking-[0.18em] text-ink-500">
-                Akun Godiand
+                Akun GoDiand
               </p>
               <h2 className="mt-1 text-2xl font-extrabold tracking-tight">
                 {step === "code"

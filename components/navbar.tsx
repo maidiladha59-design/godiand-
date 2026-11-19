@@ -37,7 +37,7 @@ export function Navbar() {
       >
         <Link
           href="/"
-          aria-label="Godiand, kembali ke beranda"
+          aria-label="GoDiand, kembali ke beranda"
           onClick={() => setOpen(false)}
         >
           <Logo preload />

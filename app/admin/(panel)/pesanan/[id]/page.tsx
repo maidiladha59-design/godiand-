@@ -4,7 +4,7 @@ import { AdminOrderDetail } from "@/components/admin/order-detail";
 import { LoadingState } from "@/components/admin/ui";
 
 export const metadata: Metadata = {
-  title: { absolute: "Detail Pesanan | Admin Godiand" },
+  title: { absolute: "Detail Pesanan | Admin GoDiand" },
   robots: { index: false, follow: false, noarchive: true },
 };
 

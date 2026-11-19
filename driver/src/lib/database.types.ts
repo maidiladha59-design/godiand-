@@ -7,6 +7,7 @@ export type ServiceType =
   | "mart";
 
 export type OrderStatus =
+  | "mencari_driver"
   | "pending"
   | "accepted"
   | "in_progress"

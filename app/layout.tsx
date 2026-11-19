@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     "laundry Banda Aceh",
     "titip beli Banda Aceh",
     "belanja online Banda Aceh",
-    "Godiand",
+    "GoDiand",
   ],
   authors: [{ name: site.name }],
   creator: site.name,

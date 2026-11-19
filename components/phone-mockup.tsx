@@ -35,12 +35,12 @@ export function PhoneMockup() {
             <span className="flex items-center gap-1.5">
               <Image
                 src="/logo.png"
-                alt="Godiand"
+                alt="GoDiand"
                 width={40}
                 height={40}
                 className="h-5 w-5"
               />
-              <span className="text-sm font-extrabold">Godiand</span>
+              <span className="text-sm font-extrabold">GoDiand</span>
             </span>
             <span className="grid h-6 w-6 place-items-center rounded-full bg-brand-100 text-[9px] font-extrabold text-brand-700">
               FA
@@ -99,7 +99,7 @@ export function PhoneMockup() {
           <div className="relative -mt-5 space-y-2.5 rounded-t-2xl bg-white p-3.5">
             <div className="flex items-center justify-between">
               <span className="text-[9px] font-extrabold uppercase tracking-[0.14em] text-ink-500">
-                GodiandRide
+                GoDiandRide
               </span>
               <span className="rounded-full bg-mint-50 px-2 py-0.5 text-[8px] font-bold text-mint-700">
                 Driver dekat

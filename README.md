@@ -1,4 +1,4 @@
-# Godiand
+# GoDiand
 
 Aplikasi ojek, antar barang, makanan, laundry, titip beli, dan belanja untuk
 Banda Aceh: situs Next.js, aplikasi pelanggan dan driver (Expo), serta panel
@@ -136,7 +136,7 @@ Di dashboard Supabase:
    **Magic Link** ke Bahasa Indonesia dan tampilkan `{{ .Token }}`. Contoh:
 
    ```html
-   <h2>Kode masuk Godiand</h2>
+   <h2>Kode masuk GoDiand</h2>
    <p>Pakai kode ini untuk masuk atau daftar:</p>
    <p style="font-size:28px;font-weight:800;letter-spacing:8px">
      {{ .Token }}
@@ -160,7 +160,7 @@ Di dashboard Supabase:
    - Username: `resend`
    - Password: API key Resend
    - Sender email: alamat dari domain yang sudah terverifikasi
-   - Sender name: `Godiand`
+   - Sender name: `GoDiand`
 
 SMTP bawaan Supabase hanya mengirim ke email anggota tim dan sangat dibatasi;
 SMTP kustom Resend diperlukan untuk pengguna nyata. Simpan API key hanya di
@@ -358,7 +358,7 @@ mobile/src/components/  UI bersama, header, pilihan, kartu pesanan, status
 mobile/src/lib/         Tema, Supabase bertipe, sesi, validasi OTP, layanan,
                         format, jarak, dan lapisan data (places, merchants,
                         orders, chat, profile)
-mobile/assets/          Ikon aplikasi dari logo Godiand
+mobile/assets/          Ikon aplikasi dari logo GoDiand
 ```
 
 ### Catatan alur
@@ -439,7 +439,7 @@ driver/src/app/         Rute: / (pengalihan), /masuk, /daftar, /verifikasi,
 driver/src/components/  UI bersama, header, pilihan, kartu pesanan, status
 driver/src/lib/         Tema, Supabase bertipe, sesi, konteks driver, layanan,
                         format, dan lapisan data (drivers, orders, chat)
-driver/assets/          Ikon aplikasi dari logo Godiand
+driver/assets/          Ikon aplikasi dari logo GoDiand
 ```
 
 ### Catatan alur

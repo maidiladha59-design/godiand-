@@ -5,7 +5,7 @@ import { Logo } from "@/components/logo";
 
 export const metadata: Metadata = {
   title: "Masuk admin",
-  description: "Masuk ke panel operasional Godiand.",
+  description: "Masuk ke panel operasional GoDiand.",
 };
 
 export default function AdminLoginPage() {
@@ -14,7 +14,7 @@ export default function AdminLoginPage() {
       <div className="w-full max-w-md">
         <Link
           href="/"
-          aria-label="Godiand, kembali ke situs"
+          aria-label="GoDiand, kembali ke situs"
           className="mx-auto mb-6 flex w-fit"
         >
           <Logo />
@@ -23,7 +23,7 @@ export default function AdminLoginPage() {
         <AdminLoginForm />
 
         <p className="mt-5 text-center text-xs font-semibold leading-relaxed text-ink-500">
-          Halaman khusus tim Godiand.{" "}
+          Halaman khusus tim GoDiand.{" "}
           <Link
             href="/"
             className="font-extrabold text-brand-700 underline underline-offset-4"

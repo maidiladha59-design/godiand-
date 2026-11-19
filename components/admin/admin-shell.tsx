@@ -46,7 +46,7 @@ export function AdminShell({
     <div className="min-h-screen bg-mist lg:grid lg:grid-cols-[16rem_minmax(0,1fr)]">
       <aside className="hidden border-r-2 border-ink-900 bg-white lg:flex lg:h-screen lg:flex-col lg:sticky lg:top-0">
         <div className="border-b-2 border-ink-900 px-5 py-5">
-          <Link href="/admin" aria-label="Godiand Admin, ke ringkasan">
+          <Link href="/admin" aria-label="GoDiand Admin, ke ringkasan">
             <Logo />
           </Link>
           <p className="mt-2 inline-block rounded-md border-2 border-ink-900 bg-sun-400 px-2 py-0.5 text-[10px] font-extrabold uppercase tracking-[0.16em]">
@@ -75,7 +75,7 @@ export function AdminShell({
         </nav>
 
         <div className="border-t-2 border-ink-900 p-4">
-          <p className="text-sm font-extrabold">{name ?? "Admin Godiand"}</p>
+          <p className="text-sm font-extrabold">{name ?? "Admin GoDiand"}</p>
           <p className="mt-0.5 break-all text-xs font-semibold text-ink-500">
             {email}
           </p>
@@ -102,7 +102,7 @@ export function AdminShell({
       <div className="flex min-w-0 flex-col">
         <header className="border-b-2 border-ink-900 bg-white lg:hidden">
           <div className="flex items-center justify-between gap-3 px-4 py-3">
-            <Link href="/admin" aria-label="Godiand Admin, ke ringkasan">
+            <Link href="/admin" aria-label="GoDiand Admin, ke ringkasan">
               <Logo />
             </Link>
             <button

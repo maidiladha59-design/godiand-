@@ -5,6 +5,11 @@ const statusMeta: Record<
   OrderStatus,
   { label: string; tone: BadgeTone; note: string }
 > = {
+  mencari_driver: {
+    label: "Pesanan baru",
+    tone: "sun",
+    note: "Pelanggan baru pesan. Ambil sebelum driver lain.",
+  },
   pending: {
     label: "Menunggu",
     tone: "sun",

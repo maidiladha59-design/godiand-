@@ -126,7 +126,7 @@ export function AdminLoginForm() {
       setCode("");
       setStep("email");
       setError(
-        "Email ini bukan admin Godiand. Akun admin dibuat manual di dashboard Supabase.",
+        "Email ini bukan admin GoDiand. Akun admin dibuat manual di dashboard Supabase.",
       );
       return;
     }
@@ -179,7 +179,7 @@ export function AdminLoginForm() {
   return (
     <div className="gd-card p-5 sm:p-7">
       <p className="text-[11px] font-extrabold uppercase tracking-[0.18em] text-brand-700">
-        Godiand Admin
+        GoDiand Admin
       </p>
       <h1 className="mt-1 text-3xl font-extrabold tracking-tight">
         {step === "code" ? "Masukkan kode" : "Masuk panel admin"}

@@ -93,7 +93,7 @@ export async function loadAvailableOrders(): Promise<{
   const { data, error } = await supabase
     .from("orders")
     .select(availableFields)
-    .eq("status", "pending")
+    .in("status", ["mencari_driver", "pending"])
     .is("driver_id", null)
     .order("created_at", { ascending: false })
     .limit(30);

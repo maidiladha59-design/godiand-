@@ -6,7 +6,7 @@ export function Why() {
     <section className="bg-white px-4 py-16 sm:py-24">
       <div className="mx-auto max-w-6xl">
         <div data-reveal className="mx-auto max-w-2xl text-center">
-          <span className="gd-label">Kenapa Godiand</span>
+          <span className="gd-label">Kenapa GoDiand</span>
           <h2 className="mt-4 text-3xl font-extrabold leading-tight tracking-tight sm:text-5xl">
             Jelas di awal, tenang{" "}
             <span className="gd-mark">sampai tujuan</span>

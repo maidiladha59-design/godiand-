@@ -106,7 +106,7 @@ export function HeroBadge() {
             <div className="gd-badge-logo w-[44%]">
               <Image
                 src="/logo.png"
-                alt="Godiand"
+                alt="GoDiand"
                 width={512}
                 height={512}
                 loading="eager"

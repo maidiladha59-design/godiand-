@@ -1,24 +1,28 @@
 import Image from "next/image";
+import { apkSizeLabel } from "@/lib/apk";
+import { ApkDownloadButton } from "./apk-download-button";
 import { StoreBadges } from "./store-badges";
 
 const apps = [
   {
-    name: "Godiand",
+    name: "GoDiand untuk Android",
     audience: "Untuk pelanggan",
     description:
       "Pesan Ride, Send, Food, Laundry, Titip, dan Mart. Tarif kelihatan sebelum pesan, lalu bayar tunai atau QRIS ke driver.",
     icon: "/logo.png",
-    iconAlt: "Godiand",
+    iconAlt: "GoDiand",
     tint: "bg-brand-50",
+    apk: true,
   },
   {
-    name: "Godiand Driver",
+    name: "GoDiand Driver",
     audience: "Untuk mitra driver",
     description:
       "Atur status aktif, terima pesanan sekitar Banda Aceh, konfirmasi pembayaran, dan pantau penghasilan harian.",
     icon: "/logo-driver.png",
-    iconAlt: "Godiand Driver",
+    iconAlt: "GoDiand Driver",
     tint: "bg-sun-50",
+    apk: false,
   },
 ];
 
@@ -53,7 +57,20 @@ export function DownloadCards() {
           <p className="mt-4 flex-1 text-[15px] leading-relaxed text-ink-600">
             {app.description}
           </p>
-          <StoreBadges className="mt-6" />
+          {app.apk ? (
+            <>
+              <ApkDownloadButton className="mt-6 w-full" />
+              <div className="mt-3 flex flex-wrap items-center justify-center gap-2">
+                <span className="rounded-full border-2 border-ink-900 bg-sun-300 px-2.5 py-0.5 text-[11px] font-extrabold text-ink-900">
+                  Versi uji coba
+                </span>
+                <span className="text-xs font-semibold text-ink-500">
+                  {apkSizeLabel}
+                </span>
+              </div>
+            </>
+          ) : null}
+          <StoreBadges className="mt-5" />
           <p className="mt-4 text-xs font-semibold text-ink-500">
             Gratis. Tanpa saldo, tanpa top-up.
           </p>

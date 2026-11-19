@@ -1,4 +1,4 @@
--- Akses panel admin Godiand.
+-- Akses panel admin GoDiand.
 -- Admin ditentukan manual lewat tabel public.admins (SQL Editor), bukan dari client.
 -- Semua aksi sensitif memakai fungsi security definer yang mengecek is_admin().
 -- Aman dijalankan ulang; data lama tidak dihapus.

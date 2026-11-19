@@ -1,4 +1,4 @@
--- Tabel inti Godiand: tempat, driver, merchant, menu, tarif, pesanan,
+-- Tabel inti GoDiand: tempat, driver, merchant, menu, tarif, pesanan,
 -- pembayaran, SOS, chat, dan rating.
 -- Aman dijalankan ulang; tidak menghapus data lama.
 -- Jalankan setelah 20261119000000_users_email_auth.sql.

@@ -5,9 +5,9 @@ import { AdminAuthProvider } from "@/components/admin/auth-provider";
 export const metadata: Metadata = {
   title: {
     default: "Panel admin",
-    template: "%s · Admin Godiand",
+    template: "%s · Admin GoDiand",
   },
-  description: "Panel operasional Godiand.",
+  description: "Panel operasional GoDiand.",
   robots: {
     index: false,
     follow: false,

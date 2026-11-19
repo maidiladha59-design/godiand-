@@ -1,4 +1,4 @@
--- Fungsi server, trigger, dan RLS untuk tabel marketplace Godiand.
+-- Fungsi server, trigger, dan RLS untuk tabel marketplace GoDiand.
 -- Aman dijalankan ulang.
 -- Jalankan setelah 20261119000100_marketplace_tables.sql.
 

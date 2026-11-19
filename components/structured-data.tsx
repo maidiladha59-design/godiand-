@@ -28,7 +28,7 @@ export function StructuredData() {
       },
       {
         "@type": "ItemList",
-        name: "Layanan Godiand",
+        name: "Layanan GoDiand",
         itemListElement: services.map((service, index) => ({
           "@type": "ListItem",
           position: index + 1,

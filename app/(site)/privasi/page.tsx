@@ -6,7 +6,7 @@ import { site, waLink } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Kebijakan Privasi",
   description:
-    "Cara Godiand mengumpulkan, memakai, dan melindungi data pelanggan serta mitra driver di Banda Aceh.",
+    "Cara GoDiand mengumpulkan, memakai, dan melindungi data pelanggan serta mitra driver di Banda Aceh.",
   alternates: { canonical: "/privasi" },
 };
 
@@ -22,9 +22,9 @@ export default function PrivasiPage() {
 
       <article className="gd-container legal-prose max-w-3xl py-14">
         <p>
-          Kebijakan ini berlaku untuk situs dan aplikasi Godiand, layanan ojek,
+          Kebijakan ini berlaku untuk situs dan aplikasi GoDiand, layanan ojek,
           antar barang, makanan, laundry, titip beli, dan belanja di Banda
-          Aceh. Dengan memakai Godiand, kamu setuju dengan cara pengelolaan
+          Aceh. Dengan memakai GoDiand, kamu setuju dengan cara pengelolaan
           data di bawah ini.
         </p>
 
@@ -32,7 +32,7 @@ export default function PrivasiPage() {
         <p>
           Kami hanya meminta data yang dibutuhkan untuk menghubungkan kamu
           dengan driver, menghitung tarif, memproses pesanan, dan menangani
-          masalah. Pembayaran dilakukan langsung ke driver, jadi Godiand tidak
+          masalah. Pembayaran dilakukan langsung ke driver, jadi GoDiand tidak
           menyimpan saldo atau data kartu.
         </p>
 
@@ -57,7 +57,7 @@ export default function PrivasiPage() {
 
         <h2>4. Pembayaran</h2>
         <p>
-          Kamu membayar tunai atau QRIS langsung ke driver. Godiand tidak
+          Kamu membayar tunai atau QRIS langsung ke driver. GoDiand tidak
           menyimpan saldo, tidak meminta top-up, dan tidak memproses data kartu
           pembayaran. Bukti pembayaran dapat dikonfirmasi oleh driver di
           aplikasi.
@@ -112,11 +112,11 @@ export default function PrivasiPage() {
         <p>
           Pertanyaan soal privasi bisa dikirim ke{" "}
           <a
-            href={waLink("Halo Godiand, saya mau tanya soal kebijakan privasi.")}
+            href={waLink()}
             target="_blank"
             rel="noopener noreferrer"
           >
-            WhatsApp Godiand
+            WhatsApp GoDiand
           </a>{" "}
           atau {site.whatsappDisplay}.
         </p>

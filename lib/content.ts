@@ -11,7 +11,7 @@ export type Service = {
 
 export const services: Service[] = [
   {
-    name: "GodiandRide",
+    name: "GoDiandRide",
     tag: "Mulai Rp9.000",
     description:
       "Ojek keliling Banda Aceh. Ke Masjid Raya, Museum Tsunami, PLTD Apung, atau santai di Ulee Lheue.",
@@ -20,7 +20,7 @@ export const services: Service[] = [
     iconColor: "text-brand-700",
   },
   {
-    name: "GodiandSend",
+    name: "GoDiandSend",
     tag: "Kirim & ambil",
     description:
       "Kirim dokumen atau ambil barang yang ketinggalan. Ada foto serah terima biar semuanya jelas.",
@@ -29,7 +29,7 @@ export const services: Service[] = [
     iconColor: "text-mint-700",
   },
   {
-    name: "GodiandFood",
+    name: "GoDiandFood",
     tag: "Warung lokal",
     description:
       "Mie Aceh, nasi gurih, martabak, sampai kopi Ulee Kareng. Warung lokal, driver yang antar.",
@@ -38,7 +38,7 @@ export const services: Service[] = [
     iconColor: "text-sun-600",
   },
   {
-    name: "GodiandLaundry",
+    name: "GoDiandLaundry",
     tag: "Jemput-antar",
     description:
       "Cucian kotor dijemput, lalu diantar balik bersih dan wangi. Cocok buat anak kos dan pekerja sibuk.",
@@ -47,7 +47,7 @@ export const services: Service[] = [
     iconColor: "text-grape-700",
   },
   {
-    name: "GodiandTitip",
+    name: "GoDiandTitip",
     tag: "Titip beli",
     description:
       "Titip beli dari pasar atau toko? Driver yang cari, belanja, lalu antar ke tanganmu.",
@@ -56,7 +56,7 @@ export const services: Service[] = [
     iconColor: "text-coral-700",
   },
   {
-    name: "GodiandMart",
+    name: "GoDiandMart",
     tag: "Belanja kilat",
     description:
       "Belanja kebutuhan dari Indomaret atau Alfamart. Dibeli, dibayar, langsung diantar.",

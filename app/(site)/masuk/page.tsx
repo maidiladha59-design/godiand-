@@ -6,7 +6,7 @@ import { PageHero } from "@/components/page-hero";
 export const metadata: Metadata = {
   title: "Masuk atau daftar",
   description:
-    "Masuk ke Godiand pakai kode 6 digit yang dikirim ke email. Tanpa password.",
+    "Masuk ke GoDiand pakai kode 6 digit yang dikirim ke email. Tanpa password.",
   alternates: { canonical: "/masuk" },
   robots: { index: false, follow: false },
 };

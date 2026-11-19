@@ -28,13 +28,13 @@ function TickerGroup() {
 export function Ticker() {
   return (
     <section
-      aria-label="Layanan Godiand"
+      aria-label="Layanan GoDiand"
       className="relative z-10 overflow-hidden py-4 sm:py-5"
     >
       <div className="relative -ml-[2%] w-[104%] -rotate-1 border-y-4 border-ink-900 bg-sun-400 py-3.5">
         <p className="sr-only">
-          GodiandRide, GodiandSend, GodiandFood, GodiandLaundry, GodiandTitip,
-          dan GodiandMart.
+          GoDiandRide, GoDiandSend, GoDiandFood, GoDiandLaundry, GoDiandTitip,
+          dan GoDiandMart.
         </p>
         <div aria-hidden="true" className="gd-marquee flex w-max">
           <TickerGroup />

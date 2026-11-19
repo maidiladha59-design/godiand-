@@ -3,8 +3,8 @@ import { site } from "@/lib/site";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "Godiand — Ojek, antar, makan di Banda Aceh",
-    short_name: "Godiand",
+    name: "GoDiand — Ojek, antar, makan di Banda Aceh",
+    short_name: "GoDiand",
     description: site.description,
     start_url: "/",
     display: "standalone",

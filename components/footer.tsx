@@ -26,7 +26,7 @@ export function Footer() {
             <ul className="mt-4 space-y-3 text-sm font-semibold">
               <li>
                 <a
-                  href={waLink("Halo Godiand, saya mau tanya-tanya.")}
+                  href={waLink()}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 transition-colors hover:text-sun-400"
@@ -92,7 +92,7 @@ export function Footer() {
         </div>
 
         <div className="mt-10 flex flex-col gap-2 border-t border-white/15 pt-6 text-xs text-white/50 sm:flex-row sm:items-center sm:justify-between">
-          <p>© 2026 Godiand. Semua hak dilindungi.</p>
+          <p>© 2026 GoDiand. Semua hak dilindungi.</p>
           <p>Versi awal: aplikasi segera hadir.</p>
         </div>
       </div>

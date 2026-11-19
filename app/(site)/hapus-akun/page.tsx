@@ -6,12 +6,12 @@ import { site, waLink } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Hapus akun",
   description:
-    "Panduan menghapus akun Godiand dan data pribadi kamu.",
+    "Panduan menghapus akun GoDiand dan data pribadi kamu.",
   alternates: { canonical: "/hapus-akun" },
 };
 
 const deletionSteps = [
-  "Kirim pesan dari nomor HP yang terdaftar ke WhatsApp Godiand dengan format: Hapus akun Godiand — [nama kamu].",
+  "Kirim pesan dari nomor HP yang terdaftar ke WhatsApp GoDiand dengan format: Hapus akun GoDiand — [nama kamu].",
   "Kami kirim kode OTP untuk memastikan permintaan benar dari pemilik akun.",
   "Setelah terverifikasi, akun dan data terkait dihapus maksimal 14 hari kerja.",
 ];
@@ -21,7 +21,7 @@ export default function HapusAkunPage() {
     <>
       <PageHero
         label="Akun"
-        title="Hapus akun Godiand"
+        title="Hapus akun GoDiand"
         description="Kamu bisa minta akun dan data pribadi dihapus kapan saja. Prosesnya sederhana dan tanpa biaya."
         meta="Berlaku untuk akun pelanggan dan mitra driver."
       />
@@ -43,9 +43,7 @@ export default function HapusAkunPage() {
           </ol>
 
           <a
-            href={waLink(
-              "Halo Godiand, saya mau menghapus akun. Nama saya: ",
-            )}
+            href={waLink()}
             target="_blank"
             rel="noopener noreferrer"
             className="gd-btn gd-btn-primary mt-6"
@@ -76,14 +74,14 @@ export default function HapusAkunPage() {
 
           <h2>Kalau tidak bisa akses nomor lama</h2>
           <p>
-            Hubungi WhatsApp Godiand dan jelaskan situasinya. Tim kami akan
+            Hubungi WhatsApp GoDiand dan jelaskan situasinya. Tim kami akan
             membantu verifikasi dengan cara lain. Jangan pernah membagikan kode
             OTP kepada siapa pun selain melalui proses resmi ini.
           </p>
 
           <h2>Catatan versi awal</h2>
           <p>
-            Aplikasi Godiand belum dirilis. Permintaan hapus akun baru bisa
+            Aplikasi GoDiand belum dirilis. Permintaan hapus akun baru bisa
             diproses setelah akun aplikasi aktif. Untuk saat ini, pesan
             WhatsApp tetap bisa dikirim agar kamu tercatat.
           </p>

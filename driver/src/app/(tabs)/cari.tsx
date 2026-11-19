@@ -108,7 +108,7 @@ function FindOrdersContent({
   return (
     <Screen onRefresh={handleRefresh} refreshing={refreshing}>
       <ScreenTitle
-        subtitle="Pesanan pending yang belum diambil driver lain."
+        subtitle="Pesanan baru yang belum diambil driver lain."
         title="Cari pesanan"
       />
 

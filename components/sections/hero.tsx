@@ -44,7 +44,8 @@ export function Hero() {
           >
             <StoreBadges />
             <p className="mt-2.5 text-xs font-semibold text-ink-600">
-              Aplikasi iPhone dan Android sedang disiapkan.
+              APK Android versi uji coba sudah bisa diunduh. App Store dan
+              Google Play segera hadir.
             </p>
           </div>
 

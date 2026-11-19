@@ -15,7 +15,7 @@ export function Logo({
     <span className={`inline-flex items-center gap-2.5 ${className}`}>
       <Image
         src="/logo.png"
-        alt="Godiand"
+        alt="GoDiand"
         width={72}
         height={72}
         className="h-9 w-9"
@@ -26,7 +26,7 @@ export function Logo({
           tone === "light" ? "text-white" : "text-ink-900"
         }`}
       >
-        Godiand
+        GoDiand
       </span>
     </span>
   );

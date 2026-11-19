@@ -25,7 +25,7 @@ export function Partner() {
             Punya motor dan tinggal di Banda Aceh?
           </h2>
           <p className="mt-4 max-w-lg text-[17px] leading-relaxed text-ink-700">
-            Gabung jadi mitra Godiand Driver. Atur sendiri kapan aktif, terima
+            Gabung jadi mitra GoDiand Driver. Atur sendiri kapan aktif, terima
             pesanan sekitar kota, dan pantau penghasilan harian plus setoran
             dari satu aplikasi.
           </p>
@@ -46,9 +46,7 @@ export function Partner() {
 
           <div className="mt-7 flex flex-wrap items-center gap-3">
             <a
-              href={waLink(
-                "Halo Godiand, saya mau daftar jadi mitra driver di Banda Aceh.",
-              )}
+              href={waLink()}
               target="_blank"
               rel="noopener noreferrer"
               className="gd-btn gd-btn-primary"
@@ -71,7 +69,7 @@ export function Partner() {
             <div className="overflow-hidden rounded-xl border-2 border-ink-900 bg-brand-100">
               <Image
                 src="/ilustrasi-driver.png"
-                alt="Ilustrasi driver Godiand sedang menerima pesanan lewat ponsel"
+                alt="Ilustrasi driver GoDiand sedang menerima pesanan lewat ponsel"
                 width={1536}
                 height={1024}
                 sizes="(min-width: 1024px) 448px, 90vw"
@@ -79,7 +77,7 @@ export function Partner() {
               />
             </div>
             <div className="flex items-center justify-between px-1 pb-1 pt-3">
-              <span className="text-lg font-extrabold">Godiand Driver</span>
+              <span className="text-lg font-extrabold">GoDiand Driver</span>
               <span className="rounded-full border-2 border-ink-900 bg-sun-400 px-2.5 py-0.5 text-[11px] font-bold">
                 Mitra lokal
               </span>

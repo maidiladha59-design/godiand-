@@ -6,7 +6,7 @@ import { site, waLink } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Syarat Layanan",
   description:
-    "Aturan penggunaan layanan Godiand untuk pelanggan dan mitra driver di Banda Aceh.",
+    "Aturan penggunaan layanan GoDiand untuk pelanggan dan mitra driver di Banda Aceh.",
   alternates: { canonical: "/syarat" },
 };
 
@@ -22,22 +22,22 @@ export default function SyaratPage() {
 
       <article className="gd-container legal-prose max-w-3xl py-14">
         <p>
-          Syarat ini mengatur penggunaan situs dan aplikasi Godiand. Dengan
+          Syarat ini mengatur penggunaan situs dan aplikasi GoDiand. Dengan
           membuat akun atau memakai layanan, kamu setuju pada aturan berikut.
         </p>
 
         <h2>1. Tentang layanan</h2>
         <p>
-          Godiand menghubungkan pelanggan dengan mitra driver lokal di Banda
+          GoDiand menghubungkan pelanggan dengan mitra driver lokal di Banda
           Aceh untuk perjalanan, pengiriman barang, makanan, laundry, titip
           beli, dan belanja. Mitra driver adalah pengguna independen, bukan
-          karyawan Godiand.
+          karyawan GoDiand.
         </p>
 
         <h2>2. Akun dan keamanan</h2>
         <ul>
           <li>Gunakan nomor HP yang aktif dan bisa menerima OTP.</li>
-          <li>Jaga kode OTP; jangan bagikan ke siapa pun, termasuk yang mengaku pihak Godiand.</li>
+          <li>Jaga kode OTP; jangan bagikan ke siapa pun, termasuk yang mengaku pihak GoDiand.</li>
           <li>Satu akun untuk satu orang. Jangan membuat akun palsu atau memakai akun orang lain.</li>
         </ul>
 
@@ -66,7 +66,7 @@ export default function SyaratPage() {
           <li>Foto serah terima dipakai sebagai bukti penyerahan barang.</li>
         </ul>
 
-        <h2>6. Laundry dan GodiandMart</h2>
+        <h2>6. Laundry dan GoDiandMart</h2>
         <p>
           Pelanggan wajib memeriksa isi cucian sebelum diserahkan dan
           menyimpan barang berharga di tempat terpisah. Untuk belanja dari
@@ -91,7 +91,7 @@ export default function SyaratPage() {
 
         <h2>9. Tanggung jawab</h2>
         <p>
-          Godiand berupaya menjaga layanan berjalan baik, tetapi tidak menjamin
+          GoDiand berupaya menjaga layanan berjalan baik, tetapi tidak menjamin
           layanan selalu bebas gangguan. Tanggung jawab kami dibatasi sejauh
           yang diizinkan hukum yang berlaku. Keadaan di luar kendali, seperti
           bencana, cuaca ekstrem, atau gangguan jaringan, dapat memengaruhi
@@ -109,11 +109,11 @@ export default function SyaratPage() {
         <p>
           Pertanyaan soal syarat layanan bisa dikirim lewat{" "}
           <a
-            href={waLink("Halo Godiand, saya mau tanya soal syarat layanan.")}
+            href={waLink()}
             target="_blank"
             rel="noopener noreferrer"
           >
-            WhatsApp Godiand
+            WhatsApp GoDiand
           </a>{" "}
           atau {site.whatsappDisplay}. Lihat juga{" "}
           <Link href="/privasi">Kebijakan Privasi</Link>.
