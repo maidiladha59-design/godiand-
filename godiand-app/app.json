@@ -36,7 +36,13 @@
           "backgroundColor": "#EAF6FC"
         }
       ],
-      "expo-font"
+      "expo-font",
+      [
+        "expo-location",
+        {
+          "locationWhenInUsePermission": "GoDiand memakai lokasi kamu untuk titik jemput dan menghitung jarak. Lokasi tidak dibagikan tanpa pesanan."
+        }
+      ]
     ],
     "extra": {
       "router": {

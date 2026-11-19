@@ -1,54 +1,23 @@
-import { Alert, Linking, StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
+import { AppScreen } from "@/components/app-screen";
 import { ServiceGrid } from "@/components/service-grid";
-import {
-  BrandHeader,
-  Card,
-  DangerButton,
-  Screen,
-  SecondaryButton,
-} from "@/components/ui";
-import { colors, radius, space } from "@/lib/theme";
+import { SosButton } from "@/components/sos-button";
+import { BrandHeader } from "@/components/ui";
+import { colors, space } from "@/lib/theme";
 
-function handleSos() {
-  Alert.alert(
-    "SOS darurat",
-    "Kamu akan diarahkan ke panggilan darurat 112. Lanjutkan?",
-    [
-      { text: "Batal", style: "cancel" },
-      {
-        text: "Telepon 112",
-        style: "destructive",
-        onPress: () => {
-          Linking.openURL("tel:112").catch(() => {
-            Alert.alert(
-              "Tidak bisa membuka panggilan",
-              "Coba telepon 112 secara manual ya.",
-            );
-          });
-        },
-      },
-    ],
-  );
-}
-
-export function BerandaContent({
-  displayName,
-  signingOut,
-  onSignOut,
-}: {
-  displayName: string;
-  signingOut: boolean;
-  onSignOut: () => void;
-}) {
+export function BerandaContent({ displayName }: { displayName: string }) {
   return (
-    <Screen>
+    <AppScreen active="beranda">
       <BrandHeader />
 
-      <View style={styles.greeting}>
-        <Text style={styles.greetingText}>Halo, {displayName}</Text>
-        <Text style={styles.greetingSubtitle}>
-          Mau pakai layanan apa hari ini?
-        </Text>
+      <View style={styles.greetingRow}>
+        <View style={styles.greeting}>
+          <Text style={styles.greetingText}>Halo, {displayName}</Text>
+          <Text style={styles.greetingSubtitle}>
+            Mau ke mana hari ini?
+          </Text>
+        </View>
+        <SosButton />
       </View>
 
       <View style={styles.chips}>
@@ -56,41 +25,33 @@ export function BerandaContent({
           <Text style={styles.chipText}>Mulai Rp9.000</Text>
         </View>
         <View style={[styles.chip, styles.chipWhite]}>
-          <Text style={styles.chipText}>Tunai/QRIS</Text>
+          <Text style={styles.chipText}>Tunai / QRIS</Text>
         </View>
       </View>
 
       <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Layanan</Text>
+        <View style={styles.sectionHead}>
+          <Text style={styles.sectionTitle}>Layanan</Text>
+          <Text style={styles.sectionMeta}>6 layanan</Text>
+        </View>
         <ServiceGrid />
         <Text style={styles.sectionNote}>
-          Alur pesan aktif bertahap. Kartu bertanda “Segera hadir” belum bisa
-          dipesan.
+          GoDiandRide sudah bisa dipesan. Lima layanan lain menyusul.
         </Text>
       </View>
-
-      <Card style={styles.sosCard}>
-        <Text style={styles.sosTitle}>Butuh bantuan cepat?</Text>
-        <Text style={styles.sosBody}>
-          SOS langsung membuka panggilan darurat 112.
-        </Text>
-        <DangerButton label="SOS Darurat" onPress={handleSos} />
-      </Card>
-
-      <View style={styles.footer}>
-        <Text style={styles.footnote}>GoDiand · Banda Aceh</Text>
-        <SecondaryButton
-          disabled={signingOut}
-          label={signingOut ? "Keluar..." : "Keluar"}
-          onPress={onSignOut}
-        />
-      </View>
-    </Screen>
+    </AppScreen>
   );
 }
 
 const styles = StyleSheet.create({
+  greetingRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    gap: space.md,
+  },
   greeting: {
+    flex: 1,
     gap: 2,
   },
   greetingText: {
@@ -112,7 +73,7 @@ const styles = StyleSheet.create({
   chip: {
     borderWidth: 2,
     borderColor: colors.ink900,
-    borderRadius: radius.pill,
+    borderRadius: 999,
     paddingHorizontal: space.md,
     paddingVertical: 7,
   },
@@ -130,36 +91,24 @@ const styles = StyleSheet.create({
   section: {
     gap: space.md,
   },
+  sectionHead: {
+    flexDirection: "row",
+    alignItems: "baseline",
+    justifyContent: "space-between",
+  },
   sectionTitle: {
     color: colors.ink900,
     fontSize: 18,
     fontWeight: "900",
   },
+  sectionMeta: {
+    color: colors.ink500,
+    fontSize: 12,
+    fontWeight: "700",
+  },
   sectionNote: {
     color: colors.ink500,
     fontSize: 12,
     lineHeight: 18,
-  },
-  sosCard: {
-    borderColor: colors.coral600,
-  },
-  sosTitle: {
-    color: colors.ink900,
-    fontSize: 18,
-    fontWeight: "900",
-  },
-  sosBody: {
-    color: colors.ink600,
-    fontSize: 13,
-    lineHeight: 19,
-  },
-  footer: {
-    gap: space.sm,
-  },
-  footnote: {
-    color: colors.ink500,
-    fontSize: 12,
-    fontWeight: "700",
-    textAlign: "center",
   },
 });

@@ -12,7 +12,7 @@ export type ServiceInfo = {
 export const services: ServiceInfo[] = [
   {
     key: "ride",
-    label: "Ride",
+    label: "GoDiandRide",
     tagline: "Cepat ke tujuan.",
     monogram: "R",
     accent: "brand",
@@ -20,7 +20,7 @@ export const services: ServiceInfo[] = [
   },
   {
     key: "send",
-    label: "Send",
+    label: "GoDiandSend",
     tagline: "Barang sampai, kamu tenang.",
     monogram: "S",
     accent: "sun",
@@ -28,7 +28,7 @@ export const services: ServiceInfo[] = [
   },
   {
     key: "food",
-    label: "Food",
+    label: "GoDiandFood",
     tagline: "Lapar? Pesan makanan.",
     monogram: "F",
     accent: "coral",
@@ -36,7 +36,7 @@ export const services: ServiceInfo[] = [
   },
   {
     key: "laundry",
-    label: "Laundry",
+    label: "GoDiandLaundry",
     tagline: "Cucian dijemput, balik bersih.",
     monogram: "L",
     accent: "mint",
@@ -44,7 +44,7 @@ export const services: ServiceInfo[] = [
   },
   {
     key: "titip",
-    label: "Titip",
+    label: "GoDiandTitip",
     tagline: "Titip beli atau urus sesuatu.",
     monogram: "T",
     accent: "grape",
@@ -52,7 +52,7 @@ export const services: ServiceInfo[] = [
   },
   {
     key: "mart",
-    label: "Mart",
+    label: "GoDiandMart",
     tagline: "Belanja kebutuhan harian.",
     monogram: "M",
     accent: "mist",

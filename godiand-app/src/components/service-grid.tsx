@@ -1,3 +1,4 @@
+import { useRouter } from "expo-router";
 import { Alert, Pressable, StyleSheet, Text, View } from "react-native";
 import { services, type ServiceAccent } from "@/lib/services";
 import { colors, hardShadow, radius, space } from "@/lib/theme";
@@ -11,36 +12,27 @@ const accentColors: Record<ServiceAccent, string> = {
   mist: colors.mist,
 };
 
-function comingSoonMessage(label: string) {
-  Alert.alert(
-    `${label} segera hadir`,
-    "Layanan ini belum aktif. Kami kabari kalau sudah siap ya.",
-  );
-}
-
-function rideMessage() {
-  Alert.alert(
-    "Pesan Ride",
-    "Alur pesan Ride sedang disiapkan. Sebentar lagi ya.",
-  );
-}
-
 export function ServiceGrid() {
+  const router = useRouter();
+
   return (
     <View style={styles.grid}>
       {services.map((service) => (
         <Pressable
           accessibilityLabel={`${service.label}${
-            service.comingSoon ? " — segera hadir" : ""
+            service.comingSoon ? " — segera hadir" : " — pesan sekarang"
           }`}
           accessibilityRole="button"
           key={service.key}
           onPress={() => {
             if (service.comingSoon) {
-              comingSoonMessage(service.label);
-            } else {
-              rideMessage();
+              Alert.alert(
+                `${service.label} segera hadir`,
+                "Layanan ini belum aktif. Kami kabari kalau sudah siap ya.",
+              );
+              return;
             }
+            router.push("/ride");
           }}
           style={({ pressed }) => [styles.card, pressed && styles.cardPressed]}
         >
@@ -57,10 +49,16 @@ export function ServiceGrid() {
               <View style={styles.badge}>
                 <Text style={styles.badgeText}>Segera hadir</Text>
               </View>
-            ) : null}
+            ) : (
+              <View style={[styles.badge, styles.badgeActive]}>
+                <Text style={styles.badgeText}>Aktif</Text>
+              </View>
+            )}
           </View>
           <View style={styles.cardText}>
-            <Text style={styles.label}>{service.label}</Text>
+            <Text numberOfLines={2} style={styles.label}>
+              {service.label}
+            </Text>
             <Text style={styles.tagline} numberOfLines={2}>
               {service.tagline}
             </Text>
@@ -121,6 +119,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
     paddingVertical: 3,
   },
+  badgeActive: {
+    backgroundColor: colors.mint50,
+  },
   badgeText: {
     color: colors.ink900,
     fontSize: 9,
@@ -133,7 +134,7 @@ const styles = StyleSheet.create({
   },
   label: {
     color: colors.ink900,
-    fontSize: 16,
+    fontSize: 15,
     fontWeight: "900",
   },
   tagline: {
