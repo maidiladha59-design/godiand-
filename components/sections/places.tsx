@@ -3,7 +3,7 @@ import { places } from "@/lib/content";
 
 export function Places() {
   return (
-    <section className="border-y-2 border-ink-900 bg-brand-600 px-4 py-16 sm:py-24">
+    <section className="overflow-x-clip border-y-2 border-ink-900 bg-brand-600 px-4 py-16 sm:py-24">
       <div className="mx-auto max-w-6xl">
         <div data-reveal className="mx-auto max-w-2xl text-center">
           <span className="gd-label">Jalan-jalan</span>
@@ -16,7 +16,7 @@ export function Places() {
           </p>
         </div>
 
-        <div className="no-scrollbar mx-auto mt-12 flex max-w-6xl snap-x gap-5 overflow-x-auto pb-3 lg:grid lg:grid-cols-4 lg:overflow-visible">
+        <div className="no-scrollbar mx-auto mt-12 flex max-w-6xl snap-x gap-5 overflow-x-auto px-5 pb-9 pt-7 scroll-px-5 lg:grid lg:grid-cols-4 lg:gap-5 lg:overflow-visible lg:px-0 lg:pb-0 lg:pt-0 lg:scroll-px-0">
           {places.map((place, index) => (
             <div
               key={place.name}

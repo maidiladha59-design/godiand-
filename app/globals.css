@@ -292,7 +292,7 @@
 .gd-road-dash {
   background-image: repeating-linear-gradient(
     90deg,
-    var(--color-sun-400) 0 2.75rem,
+    #ffc93c 0 2.75rem,
     transparent 2.75rem 5rem
   );
   animation: gd-road 7s linear infinite;
