@@ -15,6 +15,7 @@ const eslintConfig = defineConfig([
     // Aplikasi Expo punya tooling sendiri.
     "mobile/**",
     "driver/**",
+    "godiand-app/**",
   ]),
 ]);
 
