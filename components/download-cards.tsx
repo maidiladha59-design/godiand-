@@ -1,6 +1,6 @@
-import Image from "next/image";
 import { apkSizeLabel } from "@/lib/apk";
 import { ApkDownloadButton } from "./apk-download-button";
+import { Logo } from "./Logo";
 import { StoreBadges } from "./store-badges";
 
 const apps = [
@@ -9,9 +9,7 @@ const apps = [
     audience: "Untuk pelanggan",
     description:
       "Pesan Ride, Send, Food, Laundry, Titip, dan Mart. Tarif kelihatan sebelum pesan, lalu bayar tunai atau QRIS ke driver.",
-    icon: "/logo.png",
-    iconAlt: "GoDiand",
-    tint: "bg-brand-50",
+    mark: "pelanggan" as const,
     apk: true,
   },
   {
@@ -19,9 +17,7 @@ const apps = [
     audience: "Untuk mitra driver",
     description:
       "Atur status aktif, terima pesanan sekitar Banda Aceh, konfirmasi pembayaran, dan pantau penghasilan harian.",
-    icon: "/logo-driver.png",
-    iconAlt: "GoDiand Driver",
-    tint: "bg-sun-50",
+    mark: "driver" as const,
     apk: false,
   },
 ];
@@ -36,17 +32,7 @@ export function DownloadCards() {
           className="gd-card gd-lift flex h-full flex-col p-6 sm:p-7"
         >
           <div className="flex items-start gap-4">
-            <span
-              className={`grid h-16 w-16 shrink-0 place-items-center rounded-2xl border-2 border-ink-900 ${app.tint}`}
-            >
-              <Image
-                src={app.icon}
-                alt={app.iconAlt}
-                width={96}
-                height={96}
-                className="h-12 w-12"
-              />
-            </span>
+            <Logo mark={app.mark} size={64} />
             <div>
               <p className="text-[11px] font-bold uppercase tracking-wider text-ink-500">
                 {app.audience}

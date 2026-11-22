@@ -11,7 +11,7 @@ export default function MasukScreen() {
   }
 
   if (session) {
-    return <Redirect href="/" />;
+    return <Redirect href="/nama" />;
   }
 
   return <LoginForm />;

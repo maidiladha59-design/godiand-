@@ -1,10 +1,20 @@
 import { Redirect } from "expo-router";
-import { Loading } from "@/components/ui";
+import { StyleSheet, Text, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { Card, ErrorNote, Loading, SecondaryButton } from "@/components/ui";
 import { BerandaContent } from "@/features/beranda/beranda-content";
+import { useMyProfile } from "@/lib/profile";
 import { useSession } from "@/lib/session";
+import { colors, space } from "@/lib/theme";
 
 export default function BerandaScreen() {
   const { session, loading } = useSession();
+  const {
+    profile,
+    loading: profileLoading,
+    error,
+    reload,
+  } = useMyProfile();
 
   if (loading) {
     return <Loading label="Menyiapkan beranda..." />;
@@ -14,11 +24,50 @@ export default function BerandaScreen() {
     return <Redirect href="/masuk" />;
   }
 
-  const rawName = session.user.user_metadata?.name;
-  const displayName =
-    typeof rawName === "string" && rawName.trim()
-      ? rawName.trim()
-      : (session.user.email?.split("@")[0] ?? "warga Banda Aceh");
+  if (profileLoading) {
+    return <Loading label="Menyiapkan beranda..." />;
+  }
 
-  return <BerandaContent displayName={displayName} />;
+  if (error) {
+    return (
+      <SafeAreaView style={styles.safe}>
+        <View style={styles.page}>
+          <Text style={styles.title}>Beranda belum termuat</Text>
+          <Card>
+            <ErrorNote message={error} />
+            <SecondaryButton label="Coba lagi" onPress={() => void reload()} />
+          </Card>
+        </View>
+      </SafeAreaView>
+    );
+  }
+
+  const name = profile?.name?.trim();
+
+  if (!name) {
+    return <Redirect href="/nama" />;
+  }
+
+  return <BerandaContent displayName={name} />;
 }
+
+const styles = StyleSheet.create({
+  safe: {
+    flex: 1,
+    backgroundColor: colors.mist,
+  },
+  page: {
+    flex: 1,
+    justifyContent: "center",
+    width: "100%",
+    maxWidth: 480,
+    alignSelf: "center",
+    paddingHorizontal: space.xl,
+    gap: space.lg,
+  },
+  title: {
+    color: colors.ink900,
+    fontSize: 22,
+    fontWeight: "900",
+  },
+});

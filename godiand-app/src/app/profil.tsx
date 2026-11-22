@@ -1,18 +1,18 @@
 import { Redirect } from "expo-router";
 import { Loading } from "@/components/ui";
-import { AkunScreen } from "@/features/akun/akun-screen";
+import { ProfilScreen } from "@/features/profil/profil-screen";
 import { useSession } from "@/lib/session";
 
-export default function AkunRoute() {
+export default function ProfilRoute() {
   const { session, loading } = useSession();
 
   if (loading) {
-    return <Loading label="Menyiapkan akun..." />;
+    return <Loading label="Menyiapkan profil..." />;
   }
 
   if (!session) {
     return <Redirect href="/masuk" />;
   }
 
-  return <AkunScreen />;
+  return <ProfilScreen />;
 }

@@ -1,3 +1,4 @@
+import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import { useCallback, useEffect, useState } from "react";
 import {
@@ -17,12 +18,14 @@ import {
 import { formatDistanceKm, formatRupiah } from "@/lib/geo";
 import {
   fetchMyRideOrders,
-  isActiveRideStatus,
+  isRunningRideStatus,
   rideStatusLabel,
   type RideOrderStatus,
   type RideOrderSummary,
 } from "@/lib/ride-orders";
-import { colors, radius, space } from "@/lib/theme";
+import { colors, hardShadow, radius, space } from "@/lib/theme";
+
+type ActivityTab = "berjalan" | "riwayat";
 
 const monthNames = [
   "Jan",
@@ -49,6 +52,11 @@ const badgeTones: Record<RideOrderStatus, { background: string; text: string }> 
     cancelled: { background: colors.coral50, text: colors.coral700 },
   };
 
+const tabs: { key: ActivityTab; label: string }[] = [
+  { key: "berjalan", label: "Berjalan" },
+  { key: "riwayat", label: "Riwayat" },
+];
+
 function formatDate(iso: string): string {
   const date = new Date(iso);
 
@@ -65,8 +73,9 @@ function formatDate(iso: string): string {
   return `${day} ${month} ${year} · ${hour}.${minute}`;
 }
 
-export function RiwayatScreen() {
+export function AktivitasScreen() {
   const router = useRouter();
+  const [tab, setTab] = useState<ActivityTab>("berjalan");
   const [orders, setOrders] = useState<RideOrderSummary[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -82,7 +91,7 @@ export function RiwayatScreen() {
       setError(
         cause instanceof Error
           ? cause.message
-          : "Riwayat belum bisa dimuat. Coba lagi ya.",
+          : "Aktivitas belum bisa dimuat. Coba lagi ya.",
       );
     } finally {
       setLoading(false);
@@ -93,20 +102,58 @@ export function RiwayatScreen() {
     void load();
   }, [load]);
 
+  const runningOrders = orders.filter((order) =>
+    isRunningRideStatus(order.status),
+  );
+  const pastOrders = orders.filter(
+    (order) => !isRunningRideStatus(order.status),
+  );
+  const visibleOrders = tab === "berjalan" ? runningOrders : pastOrders;
+
   return (
-    <AppScreen active="riwayat">
-      <Text style={styles.title}>Riwayat</Text>
-      <Text style={styles.subtitle}>
-        {orders.length > 0 && !loading
-          ? `${orders.length} pesanan, terbaru di atas.`
-          : "Pesanan GoDiandRide kamu tercatat di sini."}
-      </Text>
+    <AppScreen active="aktivitas">
+      <View style={styles.head}>
+        <Text style={styles.title}>Aktivitas</Text>
+        <Text style={styles.subtitle}>
+          Pesanan yang sedang berjalan dan riwayat pesananmu ada di sini.
+        </Text>
+      </View>
+
+      <View accessibilityRole="tablist" style={styles.tabs}>
+        {tabs.map((item) => {
+          const selected = tab === item.key;
+          const count = item.key === "berjalan" ? runningOrders.length : null;
+
+          return (
+            <Pressable
+              accessibilityRole="tab"
+              accessibilityState={{ selected }}
+              key={item.key}
+              onPress={() => setTab(item.key)}
+              style={({ pressed }) => [
+                styles.tab,
+                selected && styles.tabActive,
+                pressed && !selected && styles.tabPressed,
+              ]}
+            >
+              <Text style={[styles.tabText, selected && styles.tabTextActive]}>
+                {item.label}
+              </Text>
+              {count ? (
+                <View style={styles.tabCount}>
+                  <Text style={styles.tabCountText}>{count}</Text>
+                </View>
+              ) : null}
+            </Pressable>
+          );
+        })}
+      </View>
 
       {loading ? (
         <Card>
           <View style={styles.loadingRow}>
             <ActivityIndicator color={colors.brand600} />
-            <Text style={styles.loadingText}>Memuat riwayat...</Text>
+            <Text style={styles.loadingText}>Memuat aktivitas...</Text>
           </View>
         </Card>
       ) : null}
@@ -123,23 +170,43 @@ export function RiwayatScreen() {
         </Card>
       ) : null}
 
-      {!loading && !error && orders.length === 0 ? (
-        <Card>
-          <Text style={styles.cardTitle}>Belum ada pesanan</Text>
-          <Text style={styles.cardBody}>
-            Setelah pesanan pertama, status dan tarifnya bisa kamu cek dari
-            halaman ini.
-          </Text>
-          <PrimaryButton
-            label="Pesan GoDiandRide"
-            onPress={() => router.push("/ride")}
-          />
+      {!loading && !error && visibleOrders.length === 0 ? (
+        <Card style={styles.emptyCard}>
+          <View style={styles.iconBox}>
+            <Ionicons
+              color={colors.ink900}
+              name={tab === "berjalan" ? "time-outline" : "receipt-outline"}
+              size={30}
+            />
+          </View>
+          {tab === "berjalan" ? (
+            <>
+              <Text style={styles.emptyTitle}>Belum ada pesanan berjalan</Text>
+              <Text style={styles.emptyBody}>
+                Pesanan yang sedang dicarikan driver atau dalam perjalanan akan
+                muncul di sini.
+              </Text>
+            </>
+          ) : (
+            <>
+              <Text style={styles.emptyTitle}>Belum ada riwayat</Text>
+              <Text style={styles.emptyBody}>
+                Pesanan yang sudah selesai atau dibatalkan akan tampil di sini.
+              </Text>
+            </>
+          )}
+          <View style={styles.emptyAction}>
+            <PrimaryButton
+              label="Pesan GoDiandRide"
+              onPress={() => router.push("/ride")}
+            />
+          </View>
         </Card>
       ) : null}
 
-      {!loading && !error && orders.length > 0 ? (
+      {!loading && !error && visibleOrders.length > 0 ? (
         <Card style={styles.listCard}>
-          {orders.map((order, index) => {
+          {visibleOrders.map((order, index) => {
             const tone = badgeTones[order.status];
 
             return (
@@ -184,7 +251,7 @@ export function RiwayatScreen() {
                   </Text>
                 </View>
 
-                {isActiveRideStatus(order.status) ? (
+                {isRunningRideStatus(order.status) ? (
                   <Pressable
                     accessibilityRole="link"
                     onPress={() => {
@@ -211,6 +278,9 @@ export function RiwayatScreen() {
 }
 
 const styles = StyleSheet.create({
+  head: {
+    gap: 6,
+  },
   title: {
     color: colors.ink900,
     fontSize: 26,
@@ -221,7 +291,59 @@ const styles = StyleSheet.create({
     color: colors.ink600,
     fontSize: 14,
     lineHeight: 20,
-    marginTop: -space.sm,
+  },
+  tabs: {
+    flexDirection: "row",
+    gap: 4,
+    borderWidth: 2,
+    borderColor: colors.ink900,
+    borderRadius: radius.pill,
+    backgroundColor: colors.white,
+    padding: 4,
+    ...hardShadow,
+  },
+  tab: {
+    flex: 1,
+    flexDirection: "row",
+    minHeight: 44,
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 6,
+    borderWidth: 2,
+    borderColor: "transparent",
+    borderRadius: radius.pill,
+    paddingHorizontal: space.sm,
+  },
+  tabActive: {
+    borderColor: colors.ink900,
+    backgroundColor: colors.sun400,
+  },
+  tabPressed: {
+    backgroundColor: colors.sun50,
+  },
+  tabText: {
+    color: colors.ink600,
+    fontSize: 14,
+    fontWeight: "800",
+  },
+  tabTextActive: {
+    color: colors.ink900,
+  },
+  tabCount: {
+    minWidth: 20,
+    height: 20,
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: radius.pill,
+    borderWidth: 2,
+    borderColor: colors.ink900,
+    backgroundColor: colors.brand600,
+    paddingHorizontal: 4,
+  },
+  tabCountText: {
+    color: colors.white,
+    fontSize: 10,
+    fontWeight: "900",
   },
   loadingRow: {
     flexDirection: "row",
@@ -233,15 +355,34 @@ const styles = StyleSheet.create({
     fontSize: 13,
     fontWeight: "600",
   },
-  cardTitle: {
+  emptyCard: {
+    alignItems: "center",
+    paddingVertical: space.xxl,
+  },
+  iconBox: {
+    width: 64,
+    height: 64,
+    alignItems: "center",
+    justifyContent: "center",
+    borderWidth: 2,
+    borderColor: colors.ink900,
+    borderRadius: radius.md,
+    backgroundColor: colors.sun400,
+  },
+  emptyTitle: {
     color: colors.ink900,
     fontSize: 18,
     fontWeight: "900",
+    textAlign: "center",
   },
-  cardBody: {
+  emptyBody: {
     color: colors.ink600,
     fontSize: 14,
     lineHeight: 21,
+    textAlign: "center",
+  },
+  emptyAction: {
+    alignSelf: "stretch",
   },
   listCard: {
     padding: 0,

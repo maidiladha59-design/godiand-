@@ -1,5 +1,5 @@
-import Image from "next/image";
 import { Icon } from "./icons";
+import { Logo } from "./Logo";
 
 /**
  * Ilustrasi mockup aplikasi untuk hero.
@@ -33,13 +33,7 @@ export function PhoneMockup() {
 
           <div className="flex items-center justify-between px-4 py-2">
             <span className="flex items-center gap-1.5">
-              <Image
-                src="/logo.png"
-                alt="GoDiand"
-                width={40}
-                height={40}
-                className="h-5 w-5"
-              />
+              <Logo size={20} />
               <span className="text-sm font-extrabold">GoDiand</span>
             </span>
             <span className="grid h-6 w-6 place-items-center rounded-full bg-brand-100 text-[9px] font-extrabold text-brand-700">

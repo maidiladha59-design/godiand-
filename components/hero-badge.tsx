@@ -1,6 +1,6 @@
-import Image from "next/image";
 import type { CSSProperties } from "react";
 import { Icon, type IconName } from "./icons";
+import { Logo } from "./Logo";
 
 const ringText =
   "DRIVER LOKAL • TARIF JELAS • BAYAR DI TEMPAT • GODIAND •";
@@ -103,15 +103,8 @@ export function HeroBadge() {
         </div>
 
         <div className="absolute inset-0 grid place-items-center">
-          <div className="gd-badge-logo w-[40%] drop-shadow-[0_4px_0_#0b1c26]">
-            <Image
-              src="/logo.png"
-              alt="GoDiand"
-              width={512}
-              height={512}
-              loading="eager"
-              className="h-auto w-full"
-            />
+          <div className="gd-badge-logo w-[40%]">
+            <Logo fluid preload />
           </div>
         </div>
       </div>

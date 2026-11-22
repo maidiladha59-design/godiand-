@@ -13,7 +13,7 @@ export function StructuredData() {
         "@id": organizationId,
         name: site.name,
         url: site.url,
-        logo: `${site.url}/logo.png`,
+        logo: `${site.url}/icon.png`,
         description: site.description,
         areaServed: { "@type": "City", name: site.city },
         sameAs: [site.instagram],

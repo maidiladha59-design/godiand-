@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Icon } from "./icons";
-import { Logo } from "./logo";
+import { Logo } from "./Logo";
 
 const navLinks = [
   { href: "/#layanan", label: "Layanan" },
@@ -16,7 +16,7 @@ export function Navbar() {
         className="gd-container flex h-[4.5rem] items-center justify-between gap-3"
       >
         <Link href="/" aria-label="GoDiand, kembali ke beranda">
-          <Logo preload variant="capsule" />
+          <Logo preload size={40} variant="dengan-nama" />
         </Link>
 
         <div className="hidden items-center gap-7 text-[15px] font-bold text-ink-700 md:flex">

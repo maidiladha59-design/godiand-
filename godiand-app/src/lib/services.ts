@@ -1,10 +1,18 @@
 export type ServiceAccent = "brand" | "sun" | "coral" | "mint" | "grape" | "mist";
 
+export type ServiceIcon =
+  | "bicycle"
+  | "cube"
+  | "shirt"
+  | "fast-food"
+  | "bag-handle"
+  | "cart";
+
 export type ServiceInfo = {
   key: string;
   label: string;
   tagline: string;
-  monogram: string;
+  icon: ServiceIcon;
   accent: ServiceAccent;
   comingSoon: boolean;
 };
@@ -14,7 +22,7 @@ export const services: ServiceInfo[] = [
     key: "ride",
     label: "GoDiandRide",
     tagline: "Cepat ke tujuan.",
-    monogram: "R",
+    icon: "bicycle",
     accent: "brand",
     comingSoon: false,
   },
@@ -22,31 +30,31 @@ export const services: ServiceInfo[] = [
     key: "send",
     label: "GoDiandSend",
     tagline: "Barang sampai, kamu tenang.",
-    monogram: "S",
+    icon: "cube",
     accent: "sun",
-    comingSoon: true,
-  },
-  {
-    key: "food",
-    label: "GoDiandFood",
-    tagline: "Lapar? Pesan makanan.",
-    monogram: "F",
-    accent: "coral",
     comingSoon: true,
   },
   {
     key: "laundry",
     label: "GoDiandLaundry",
     tagline: "Cucian dijemput, balik bersih.",
-    monogram: "L",
+    icon: "shirt",
     accent: "mint",
+    comingSoon: true,
+  },
+  {
+    key: "food",
+    label: "GoDiandFood",
+    tagline: "Lapar? Pesan makanan.",
+    icon: "fast-food",
+    accent: "coral",
     comingSoon: true,
   },
   {
     key: "titip",
     label: "GoDiandTitip",
     tagline: "Titip beli atau urus sesuatu.",
-    monogram: "T",
+    icon: "bag-handle",
     accent: "grape",
     comingSoon: true,
   },
@@ -54,7 +62,7 @@ export const services: ServiceInfo[] = [
     key: "mart",
     label: "GoDiandMart",
     tagline: "Belanja kebutuhan harian.",
-    monogram: "M",
+    icon: "cart",
     accent: "mist",
     comingSoon: true,
   },

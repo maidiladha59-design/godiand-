@@ -10,7 +10,6 @@ import {
 import {
   ActivityIndicator,
   Alert,
-  Image,
   KeyboardAvoidingView,
   Linking,
   Platform,
@@ -24,6 +23,7 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { ConfigNotice } from "@/components/config-notice";
+import { Logo } from "@/components/logo";
 import { Loading } from "@/components/ui";
 import { sendEmailOtp, verifyEmailOtp } from "@/lib/auth/otp";
 import { isValidEmail, normalizeEmail } from "@/lib/auth/validation";
@@ -129,12 +129,7 @@ function AuthLayout({
 function AuthHeader() {
   return (
     <View style={styles.header}>
-      <Image
-        accessibilityLabel="Logo GoDiand"
-        source={require("../../../assets/logo.png")}
-        style={styles.logo}
-      />
-      <Text style={styles.brandName}>GoDiand</Text>
+      <Logo size={96} variant="dengan-nama" />
       <Text style={styles.tagline}>
         Ojek, antar, makan. Sat-set di Banda Aceh.
       </Text>
@@ -621,17 +616,6 @@ const styles = StyleSheet.create({
   header: {
     alignItems: "center",
     gap: 6,
-  },
-  logo: {
-    width: 96,
-    height: 96,
-  },
-  brandName: {
-    color: authColors.ink,
-    fontFamily: fonts.extrabold,
-    fontSize: 32,
-    letterSpacing: -0.8,
-    marginTop: 2,
   },
   tagline: {
     color: authColors.muted,

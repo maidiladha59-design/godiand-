@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, type ReactNode } from "react";
-import { Logo } from "@/components/logo";
+import { Logo } from "@/components/Logo";
 
 const navigation = [
   { href: "/admin", label: "Ringkasan" },
@@ -47,7 +47,7 @@ export function AdminShell({
       <aside className="hidden border-r-2 border-ink-900 bg-white lg:flex lg:h-screen lg:flex-col lg:sticky lg:top-0">
         <div className="border-b-2 border-ink-900 px-5 py-5">
           <Link href="/admin" aria-label="GoDiand Admin, ke ringkasan">
-            <Logo />
+            <Logo size={36} variant="dengan-nama" />
           </Link>
           <p className="mt-2 inline-block rounded-md border-2 border-ink-900 bg-sun-400 px-2 py-0.5 text-[10px] font-extrabold uppercase tracking-[0.16em]">
             Panel admin
@@ -103,7 +103,7 @@ export function AdminShell({
         <header className="border-b-2 border-ink-900 bg-white lg:hidden">
           <div className="flex items-center justify-between gap-3 px-4 py-3">
             <Link href="/admin" aria-label="GoDiand Admin, ke ringkasan">
-              <Logo />
+              <Logo size={32} variant="dengan-nama" />
             </Link>
             <button
               type="button"

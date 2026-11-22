@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { AdminLoginForm } from "@/components/admin/login-form";
-import { Logo } from "@/components/logo";
+import { Logo } from "@/components/Logo";
 
 export const metadata: Metadata = {
   title: "Masuk admin",
@@ -17,7 +17,7 @@ export default function AdminLoginPage() {
           aria-label="GoDiand, kembali ke situs"
           className="mx-auto mb-6 flex w-fit"
         >
-          <Logo />
+          <Logo size={40} variant="dengan-nama" />
         </Link>
 
         <AdminLoginForm />

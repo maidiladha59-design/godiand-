@@ -1,3 +1,5 @@
+import { Logo } from "./Logo";
+
 type PageHeroProps = {
   label: string;
   title: string;
@@ -17,6 +19,9 @@ export function PageHero({ label, title, description, meta }: PageHeroProps) {
         className="absolute -right-16 -top-16 h-56 w-56 rounded-full bg-sun-300/60"
       />
       <div className="gd-container relative py-14 sm:py-20">
+        <div className="mb-5">
+          <Logo size={56} />
+        </div>
         <span className="gd-label">{label}</span>
         <h1 className="mt-4 max-w-3xl text-[clamp(2.2rem,6vw,3.8rem)] font-extrabold leading-[1.05] tracking-tight">
           {title}

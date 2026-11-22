@@ -1,6 +1,6 @@
 import { Redirect } from "expo-router";
 import { Loading } from "@/components/ui";
-import { RiwayatScreen } from "@/features/riwayat/riwayat-screen";
+import { AktivitasScreen } from "@/features/aktivitas/aktivitas-screen";
 import { useSession } from "@/lib/session";
 
 export default function RiwayatRoute() {
@@ -14,5 +14,5 @@ export default function RiwayatRoute() {
     return <Redirect href="/masuk" />;
   }
 
-  return <RiwayatScreen />;
+  return <AktivitasScreen />;
 }

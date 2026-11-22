@@ -65,6 +65,15 @@ export function isActiveRideStatus(status: RideOrderStatus): boolean {
   return activeRideStatuses.includes(status);
 }
 
+const runningRideStatuses: RideOrderStatus[] = [
+  ...activeRideStatuses,
+  "in_progress",
+];
+
+export function isRunningRideStatus(status: RideOrderStatus): boolean {
+  return runningRideStatuses.includes(status);
+}
+
 export const rideStatusLabel: Record<RideOrderStatus, string> = {
   mencari_driver: "Mencari driver",
   pending: "Mencari driver",
@@ -88,7 +97,11 @@ function requireClient() {
 function toFriendlyError(message: string | undefined, fallback: string): Error {
   const text = message ?? "";
 
-  if (/could not find the function|schema cache/i.test(text)) {
+  if (
+    /could not find the function|schema cache|column .+ does not exist/i.test(
+      text,
+    )
+  ) {
     return new Error("Layanan pesanan belum aktif di server. Coba lagi nanti.");
   }
 

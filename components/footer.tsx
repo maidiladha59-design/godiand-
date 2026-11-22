@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { site, waLink } from "@/lib/site";
 import { Icon } from "./icons";
-import { Logo } from "./logo";
+import { Logo } from "./Logo";
 
 export function Footer() {
   return (
@@ -9,7 +9,7 @@ export function Footer() {
       <div className="gd-container py-12">
         <div className="grid gap-10 md:grid-cols-[1.5fr_1fr_1fr]">
           <div>
-            <Logo tone="light" />
+            <Logo size={40} tone="light" variant="dengan-nama" />
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-white/70">
               {site.tagline}
             </p>

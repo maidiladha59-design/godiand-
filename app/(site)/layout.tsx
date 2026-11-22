@@ -18,6 +18,14 @@ export const metadata: Metadata = {
     siteName: site.name,
     title: `${site.name} — Ojek, Antar, Makan di Banda Aceh`,
     description: site.description,
+    images: [
+      {
+        url: "/opengraph-image.png",
+        width: 1200,
+        height: 630,
+        alt: "GoDiand — Ojek, antar, makan di Banda Aceh",
+      },
+    ],
   },
 };
 
