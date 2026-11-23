@@ -17,6 +17,7 @@ import {
   SecondaryButton,
 } from "@/components/ui";
 import { formatDistanceKm, formatRupiah } from "@/lib/geo";
+import { supabase } from "@/lib/supabase";
 import {
   cancelRideOrder,
   fetchRideOrder,
@@ -44,6 +45,8 @@ export function SearchingScreen({ orderId }: { orderId: string }) {
   const [cancelling, setCancelling] = useState(false);
   const [confirmingCancel, setConfirmingCancel] = useState(false);
   const [cancelError, setCancelError] = useState("");
+  const [extraWaitMs, setExtraWaitMs] = useState(0);
+  const [now, setNow] = useState(() => Date.now());
 
   const finished = order ? !isActiveRideStatus(order.status) : false;
 
@@ -90,6 +93,7 @@ export function SearchingScreen({ orderId }: { orderId: string }) {
       };
     }
 
+    // Cadangan kalau Realtime putus atau diblokir jaringan.
     const timer = setInterval(() => {
       void load();
     }, 5000);
@@ -99,6 +103,39 @@ export function SearchingScreen({ orderId }: { orderId: string }) {
       clearInterval(timer);
     };
   }, [orderId, finished, load]);
+
+  useEffect(() => {
+    if (!supabase) return;
+
+    const client = supabase;
+    const channel = client
+      .channel(`ride-order-${orderId}`)
+      .on(
+        "postgres_changes",
+        {
+          event: "UPDATE",
+          schema: "public",
+          table: "orders",
+          filter: `id=eq.${orderId}`,
+        },
+        () => {
+          void load();
+        },
+      )
+      .subscribe();
+
+    return () => {
+      client.removeChannel(channel).catch(() => {});
+    };
+  }, [orderId, load]);
+
+  useEffect(() => {
+    if (!order || !isActiveRideStatus(order.status)) return;
+
+    const timer = setInterval(() => setNow(Date.now()), 1000);
+
+    return () => clearInterval(timer);
+  }, [order]);
 
   async function handleCancel() {
     if (cancelling) return;
@@ -149,6 +186,13 @@ export function SearchingScreen({ orderId }: { orderId: string }) {
   }
 
   const active = isActiveRideStatus(order.status);
+  const searching =
+    order.status === "mencari_driver" || order.status === "pending";
+  const createdAtMs = Date.parse(order.created_at);
+  const waitedTooLong =
+    searching &&
+    Number.isFinite(createdAtMs) &&
+    now >= createdAtMs + 180000 + extraWaitMs;
   const payableLabel = order.payment_method
     ? `Bayar ${paymentMethodLabel(order.payment_method)} ke driver`
     : "Bayar langsung ke driver";
@@ -225,6 +269,32 @@ export function SearchingScreen({ orderId }: { orderId: string }) {
 
           {cancelError ? <ErrorNote message={cancelError} /> : null}
 
+          {waitedTooLong && !confirmingCancel ? (
+            <View style={styles.waitBox}>
+              <Text style={styles.waitTitle}>Belum dapat driver nih</Text>
+              <Text style={styles.waitText}>
+                Sudah 3 menit. Mau tunggu sebentar lagi atau batalkan pesanan?
+              </Text>
+              <View style={styles.confirmRow}>
+                <View style={styles.confirmCol}>
+                  <SecondaryButton
+                    label="Tunggu lagi"
+                    onPress={() => {
+                      setExtraWaitMs((value) => value + 180000);
+                      setNow(Date.now());
+                    }}
+                  />
+                </View>
+                <View style={styles.confirmCol}>
+                  <DangerButton
+                    label="Batalkan"
+                    onPress={() => setConfirmingCancel(true)}
+                  />
+                </View>
+              </View>
+            </View>
+          ) : null}
+
           {confirmingCancel ? (
             <View style={styles.confirmBox}>
               <Text style={styles.confirmText}>
@@ -249,7 +319,7 @@ export function SearchingScreen({ orderId }: { orderId: string }) {
                 </View>
               </View>
             </View>
-          ) : (
+          ) : waitedTooLong ? null : (
             <DangerButton
               label="Batalkan pesanan"
               onPress={() => setConfirmingCancel(true)}
@@ -400,6 +470,25 @@ const styles = StyleSheet.create({
     color: colors.ink600,
     fontSize: 12,
     lineHeight: 17,
+  },
+  waitBox: {
+    borderWidth: 2,
+    borderColor: colors.ink900,
+    borderRadius: radius.md,
+    backgroundColor: colors.sun50,
+    padding: space.md,
+    gap: space.sm,
+  },
+  waitTitle: {
+    color: colors.ink900,
+    fontSize: 15,
+    fontWeight: "900",
+  },
+  waitText: {
+    color: colors.ink700,
+    fontSize: 12,
+    lineHeight: 18,
+    fontWeight: "600",
   },
   confirmBox: {
     borderWidth: 2,

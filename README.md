@@ -184,6 +184,14 @@ dijalankan ulang dan tidak menghapus data lama.
    aktif per driver, dan fungsi `is_verified_driver()`.
 6. [`20261119000500_admin_panel.sql`](supabase/migrations/20261119000500_admin_panel.sql)
    — tabel `admins`, `is_admin()`, policy baca admin, dan semua RPC admin.
+7. [`20261120000100_customer_ride_orders.sql`](supabase/migrations/20261120000100_customer_ride_orders.sql)
+   — status `mencari_driver`, koordinat jemput/tujuan, dan RPC
+   `create_ride_order`.
+8. [`20261120000200_driver_sees_new_orders.sql`](supabase/migrations/20261120000200_driver_sees_new_orders.sql)
+   — driver terverifikasi bisa melihat pesanan baru yang belum diambil.
+9. [`20261123000100_godiandride_langkah1.sql`](supabase/migrations/20261123000100_godiandride_langkah1.sql)
+   — tarif GoDiandRide, RPC `hitung_tarif`/`buat_pesanan`, koordinat
+   OpenStreetMap, dan Realtime tabel `orders`.
 
 Tanpa migration #1, akun auth tetap dibuat tetapi baris `public.users` tidak
 muncul. Tanpa migration #3, RLS tidak aktif dan tarif tidak terhitung. Tanpa
@@ -229,7 +237,16 @@ Fungsi server yang bisa dipanggil dari aplikasi:
 
 ```sql
 -- Estimasi tarif (layanan: ride, send, food, laundry, titip, mart)
-select public.calculate_fare('ride', 3.4);
+select public.hitung_tarif('ride', 3.4);
+select public.calculate_fare('ride', 3.4); -- nama lama, rumus sama
+
+-- Pesanan GoDiandRide dari aplikasi pelanggan
+select * from public.buat_pesanan(
+  'ride',
+  'Lokasi saat ini', 5.5483, 95.3238,
+  'Masjid Raya Baiturrahman', 5.553631, 95.317193,
+  'tunai'
+);
 
 -- Dipanggil driver terverifikasi
 select * from public.accept_order('<order-id>');
@@ -239,6 +256,34 @@ select * from public.update_order_status('<order-id>', 'completed');
 -- Pelanggan atau driver yang terkait
 select * from public.cancel_order('<order-id>', 'Alasan opsional');
 ```
+
+Untuk menguji perubahan status tanpa aplikasi driver, jalankan di **SQL
+Editor** (bukan dari client). Realtime akan meneruskan perubahan ini ke layar
+"Mencari driver" bila migration #9 sudah dijalankan.
+
+```sql
+-- Lihat pesanan terbaru; salin id yang mau diuji
+select id, status, distance_km, total_amount, created_at
+from public.orders
+order by created_at desc
+limit 5;
+
+update public.orders
+set status = 'accepted', accepted_at = now()
+where id = '<order-id>';
+
+update public.orders
+set status = 'in_progress'
+where id = '<order-id>';
+
+update public.orders
+set status = 'completed', completed_at = now()
+where id = '<order-id>';
+```
+
+Status hanya untuk pengujian. Di produksi, driver dan admin yang mengubah
+status lewat RPC. Jangan membagikan `service_role` atau menjalankan SQL ini
+dari aplikasi.
 
 `delivery_fee` dihitung trigger dari `calculate_fare`; client tidak bisa
 menentukan tarif sendiri. Tarif dibulatkan ke atas per Rp500 dan dibatasi
@@ -250,9 +295,12 @@ aturan satu pesanan aktif per driver tetap berlaku.
 
 Catatan seed dan pengaturan manual:
 
-- 8 tempat diisi dengan koordinat perkiraan. Perbaiki lewat **Table Editor**
-  bila perlu.
-- 6 baris `fares` adalah **tarif awal** (berlaku 1 November 2026). Cek
+- 8 tempat diisi di Banda Aceh. Empat ikonik (Masjid Raya, Museum Tsunami,
+  PLTD Apung, Pantai Ulee Lheue) memakai koordinat OpenStreetMap/Nominatim
+  yang dicek 23 November 2026; sisanya masih perkiraan. Perbaiki lewat
+  **Table Editor** bila perlu.
+- `fares` berisi **tarif awal**. GoDiandRide: Rp9.000 untuk 2 km pertama,
+  Rp3.000/km berikutnya, minimum Rp9.000 (berlaku 23 November 2026). Cek
   angkanya sebelum rilis; ubah di **Table Editor**, atau tambahkan baris baru
   dengan `effective_from` lebih baru.
 - Tidak ada data driver, merchant, atau menu palsu. Daftarkan lewat akun
