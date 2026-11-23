@@ -9,6 +9,7 @@ import {
 import {
   Card,
   ErrorNote,
+  InfoNote,
   PrimaryButton,
 } from "@/components/ui";
 import {
@@ -115,9 +116,19 @@ export function RideFareCard({
   return (
     <Card>
       <View style={styles.head}>
-        <Text style={styles.title}>Perkiraan tarif</Text>
-        <Text style={styles.distance}>{formatDistanceKm(distance)}</Text>
+        <Text style={styles.title}>Estimasi tarif</Text>
+        <Text style={styles.distance}>
+          Estimasi {formatDistanceKm(distance)}
+        </Text>
       </View>
+
+      {distance > 25 ? (
+        <InfoNote
+          message={`Perjalanan ini sekitar ${formatDistanceKm(
+            distance,
+          )}. Cukup jauh untuk ojek, jadi tarifnya juga lebih besar. Pastikan kamu nyaman dulu ya.`}
+        />
+      ) : null}
 
       {fareState.status === "loading" ? (
         <View style={styles.loadingRow}>

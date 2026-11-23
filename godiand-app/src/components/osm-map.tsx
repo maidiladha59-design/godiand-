@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { Ionicons } from "@expo/vector-icons";
+import { useEffect, useState } from "react";
 import {
   Image,
   Linking,
@@ -9,7 +10,7 @@ import {
   View,
   type LayoutChangeEvent,
 } from "react-native";
-import { colors, radius } from "@/lib/theme";
+import { colors, radius, space } from "@/lib/theme";
 
 const TILE = 256;
 const ZOOM = 15;
@@ -68,17 +69,33 @@ export function OsmMap({
   height?: number;
 }) {
   const [measuredWidth, setMeasuredWidth] = useState(0);
+  const [failedTiles, setFailedTiles] = useState<Set<string>>(new Set());
+  const [retry, setRetry] = useState(0);
   const window = useWindowDimensions();
   // Card lebar maksimal 560, padding layar 16, border kartu 2.
   const fallbackWidth = Math.max(0, Math.min(window.width, 560) - 36);
   const width = measuredWidth > 0 ? measuredWidth : fallbackWidth;
+
+  useEffect(() => {
+    setFailedTiles(new Set());
+  }, [latitude, longitude, width, height, retry]);
 
   function handleLayout(event: LayoutChangeEvent) {
     const next = Math.round(event.nativeEvent.layout.width);
     if (next > 0) setMeasuredWidth(next);
   }
 
+  function handleTileError(key: string) {
+    setFailedTiles((current) => {
+      if (current.has(key)) return current;
+      const next = new Set(current);
+      next.add(key);
+      return next;
+    });
+  }
+
   const tiles = width > 0 ? buildTiles(latitude, longitude, width, height) : [];
+  const tilesFailed = tiles.length > 0 && failedTiles.size >= tiles.length;
 
   return (
     <View
@@ -88,8 +105,9 @@ export function OsmMap({
     >
       {tiles.map((tile) => (
         <Image
-          key={tile.key}
+          key={`${tile.key}-${retry}`}
           accessibilityIgnoresInvertColors
+          onError={() => handleTileError(tile.key)}
           source={{
             uri: tile.uri,
             headers: { "User-Agent": "GoDiand/0.1 (Banda Aceh)" },
@@ -98,16 +116,69 @@ export function OsmMap({
         />
       ))}
 
-      {width > 0 ? (
+      {tilesFailed ? (
+        <View style={styles.fallback}>
+          <View style={styles.fallbackIcon}>
+            <Ionicons
+              color={colors.ink900}
+              name="cloud-offline-outline"
+              size={24}
+            />
+          </View>
+          <Text style={styles.fallbackTitle}>Peta online belum tampil</Text>
+          <Text style={styles.fallbackText}>
+            Koneksi lambat atau peta diblokir. Titik tetap tercatat di{" "}
+            {latitude.toFixed(5)}, {longitude.toFixed(5)}.
+          </Text>
+          <View style={styles.fallbackActions}>
+            <Pressable
+              accessibilityRole="button"
+              onPress={() => setRetry((value) => value + 1)}
+              style={({ pressed }) => [
+                styles.fallbackButton,
+                pressed && styles.fallbackButtonPressed,
+              ]}
+            >
+              <Text style={styles.fallbackButtonText}>Coba lagi</Text>
+            </Pressable>
+            <Pressable
+              accessibilityRole="link"
+              onPress={() => {
+                Linking.openURL(
+                  `https://www.openstreetmap.org/?mlat=${latitude}&mlon=${longitude}#map=15/${latitude}/${longitude}`,
+                ).catch(() => {});
+              }}
+              style={({ pressed }) => [
+                styles.fallbackButton,
+                styles.fallbackButtonAlt,
+                pressed && styles.fallbackButtonPressed,
+              ]}
+            >
+              <Text
+                style={[
+                  styles.fallbackButtonText,
+                  styles.fallbackButtonAltText,
+                ]}
+              >
+                Buka peta
+              </Text>
+            </Pressable>
+          </View>
+        </View>
+      ) : null}
+
+      {width > 0 && !tilesFailed ? (
         <View
           pointerEvents="none"
           style={[styles.marker, { left: width / 2 - 14, top: height / 2 - 28 }]}
         >
           <View style={styles.markerDot} />
         </View>
-      ) : (
+      ) : null}
+
+      {width === 0 ? (
         <Text style={styles.loading}>Menyiapkan peta...</Text>
-      )}
+      ) : null}
 
       <Pressable
         accessibilityLabel="Informasi lisensi peta OpenStreetMap"
@@ -165,6 +236,72 @@ const styles = StyleSheet.create({
     color: colors.ink600,
     fontSize: 12,
     fontWeight: "700",
+  },
+  fallback: {
+    position: "absolute",
+    top: 0,
+    right: 0,
+    bottom: 0,
+    left: 0,
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 3,
+    backgroundColor: colors.brand100,
+    paddingHorizontal: space.md,
+    paddingBottom: 24,
+  },
+  fallbackIcon: {
+    width: 40,
+    height: 40,
+    alignItems: "center",
+    justifyContent: "center",
+    borderWidth: 2,
+    borderColor: colors.ink900,
+    borderRadius: radius.sm,
+    backgroundColor: colors.sun400,
+    marginBottom: 2,
+  },
+  fallbackTitle: {
+    color: colors.ink900,
+    fontSize: 14,
+    fontWeight: "900",
+    textAlign: "center",
+  },
+  fallbackText: {
+    color: colors.ink600,
+    fontSize: 11,
+    lineHeight: 15,
+    textAlign: "center",
+    maxWidth: 300,
+  },
+  fallbackActions: {
+    flexDirection: "row",
+    gap: space.sm,
+    marginTop: 3,
+  },
+  fallbackButton: {
+    minHeight: 30,
+    justifyContent: "center",
+    borderWidth: 2,
+    borderColor: colors.ink900,
+    borderRadius: radius.pill,
+    backgroundColor: colors.brand600,
+    paddingHorizontal: 12,
+    paddingVertical: 4,
+  },
+  fallbackButtonAlt: {
+    backgroundColor: colors.sun400,
+  },
+  fallbackButtonPressed: {
+    opacity: 0.8,
+  },
+  fallbackButtonText: {
+    color: colors.white,
+    fontSize: 11,
+    fontWeight: "900",
+  },
+  fallbackButtonAltText: {
+    color: colors.ink900,
   },
   attribution: {
     position: "absolute",

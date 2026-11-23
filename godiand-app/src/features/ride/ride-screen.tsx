@@ -285,15 +285,15 @@ export function RideScreen() {
         />
       ) : (
         <Card>
-          <Text style={styles.cardTitle}>Perkiraan tarif</Text>
+          <Text style={styles.cardTitle}>Estimasi tarif</Text>
           <Text style={styles.fareEmpty}>
-            Pilih titik jemput dan tujuan dulu. Tarif muncul di sini sebelum
-            kamu pesan.
+            Pilih titik jemput dan tujuan dulu. Estimasi tarif muncul di sini
+            sebelum kamu pesan.
           </Text>
         </Card>
       )}
 
-      <InfoNote message="Tarif dihitung dari jarak, minimal Rp9.000. Bayar tunai atau QRIS langsung ke driver." />
+      <InfoNote message="Jarak dan tarif masih estimasi, minimal Rp9.000. Bayar tunai atau QRIS langsung ke driver." />
     </Screen>
   );
 }

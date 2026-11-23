@@ -5,8 +5,9 @@ export type Coordinates = {
 
 const EARTH_RADIUS_KM = 6371;
 
-// Jalan di Banda Aceh berbelok; jarak lurus dikali faktor ini biar
-// perkiraan tarif tidak terlalu murah dibanding rute sebenarnya.
+// Estimasi sementara: jarak lurus dikali faktor jalan biar tarif tidak
+// terlalu murah. Nanti ganti perhitungan ini dengan layanan rute
+// (mis. OSRM/GraphHopper) supaya jarak mengikuti jalan sebenarnya.
 const ROAD_FACTOR = 1.3;
 
 function toRadians(value: number): number {
