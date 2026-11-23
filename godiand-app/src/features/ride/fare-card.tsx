@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
   ActivityIndicator,
   Pressable,
@@ -11,6 +11,7 @@ import {
   ErrorNote,
   InfoNote,
   PrimaryButton,
+  SecondaryButton,
 } from "@/components/ui";
 import {
   formatDistanceKm,
@@ -50,9 +51,11 @@ export function RideFareCard({
     [pickup, destination],
   );
   const [fareState, setFareState] = useState<FareState>({ status: "loading" });
+  const [fareAttempt, setFareAttempt] = useState(0);
   const [payment, setPayment] = useState<PaymentMethod>("cash");
   const [ordering, setOrdering] = useState(false);
   const [error, setError] = useState("");
+  const submitLock = useRef(false);
 
   useEffect(() => {
     let active = true;
@@ -79,11 +82,12 @@ export function RideFareCard({
     return () => {
       active = false;
     };
-  }, [distance]);
+  }, [distance, fareAttempt]);
 
   async function handleOrder() {
-    if (fareState.status !== "ready" || ordering) return;
+    if (fareState.status !== "ready" || submitLock.current) return;
 
+    submitLock.current = true;
     setOrdering(true);
     setError("");
 
@@ -107,6 +111,7 @@ export function RideFareCard({
           : "Pesanan belum bisa dibuat. Coba lagi ya.",
       );
     } finally {
+      submitLock.current = false;
       setOrdering(false);
     }
   }
@@ -130,6 +135,21 @@ export function RideFareCard({
         />
       ) : null}
 
+      <View style={styles.route}>
+        <View style={styles.routeRow}>
+          <View style={styles.dotStart} />
+          <Text numberOfLines={1} style={styles.routeText}>
+            {pickup.name}
+          </Text>
+        </View>
+        <View style={styles.routeRow}>
+          <View style={styles.dotEnd} />
+          <Text numberOfLines={1} style={styles.routeText}>
+            {destination.name}
+          </Text>
+        </View>
+      </View>
+
       {fareState.status === "loading" ? (
         <View style={styles.loadingRow}>
           <ActivityIndicator color={colors.brand600} />
@@ -138,18 +158,25 @@ export function RideFareCard({
       ) : null}
 
       {fareState.status === "error" ? (
-        <ErrorNote message={fareState.message} />
+        <>
+          <ErrorNote message={fareState.message} />
+          <SecondaryButton
+            label="Coba hitung ulang"
+            onPress={() => setFareAttempt((value) => value + 1)}
+          />
+        </>
       ) : null}
 
       {ready ? (
         <>
           <View style={styles.fareBox}>
+            <Text style={styles.fareLabel}>Tarif</Text>
             <Text style={styles.fareValue}>
               {formatRupiah(fareState.fare)}
             </Text>
             <Text style={styles.fareHint}>
-              Tarif ini yang dipakai saat kamu pesan. Bayar langsung ke driver,
-              tanpa saldo atau top-up.
+              Tarif ini yang dipakai saat kamu pesan. Tanpa saldo, tanpa
+              top-up.
             </Text>
           </View>
 
@@ -186,8 +213,8 @@ export function RideFareCard({
               })}
             </View>
             <Text style={styles.payNote}>
-              {paymentMethodLabel(payment)} ke driver — bayar saat jemput atau
-              sampai tujuan.
+              Bayar ke driver saat selesai — {paymentMethodLabel(payment)}.
+              Tanpa saldo atau top-up.
             </Text>
           </View>
 
@@ -239,11 +266,49 @@ const styles = StyleSheet.create({
     padding: space.md,
     gap: 4,
   },
+  fareLabel: {
+    color: colors.ink600,
+    fontSize: 10,
+    fontWeight: "900",
+    letterSpacing: 1,
+    textTransform: "uppercase",
+  },
   fareValue: {
     color: colors.ink900,
     fontSize: 32,
     fontWeight: "900",
     letterSpacing: -0.6,
+  },
+  route: {
+    gap: 3,
+  },
+  routeRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: space.sm,
+  },
+  dotStart: {
+    width: 10,
+    height: 10,
+    borderRadius: 5,
+    borderWidth: 2,
+    borderColor: colors.ink900,
+    backgroundColor: colors.brand600,
+  },
+  dotEnd: {
+    width: 10,
+    height: 10,
+    borderRadius: 5,
+    borderWidth: 2,
+    borderColor: colors.ink900,
+    backgroundColor: colors.sun400,
+  },
+  routeText: {
+    flex: 1,
+    color: colors.ink900,
+    fontSize: 13,
+    lineHeight: 18,
+    fontWeight: "800",
   },
   fareHint: {
     color: colors.ink700,

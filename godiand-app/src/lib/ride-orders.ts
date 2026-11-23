@@ -112,6 +112,16 @@ function toFriendlyError(message: string | undefined, fallback: string): Error {
     return new Error("Sesi kamu sudah berakhir. Masuk ulang ya.");
   }
 
+  if (
+    /network request failed|failed to fetch|fetch failed|load failed|timed? ?out|timeout/i.test(
+      text,
+    )
+  ) {
+    return new Error(
+      "Jaringan lagi bermasalah. Cek koneksi internet lalu coba lagi ya.",
+    );
+  }
+
   return new Error(text || fallback);
 }
 
