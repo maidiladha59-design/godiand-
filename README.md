@@ -468,6 +468,54 @@ npx expo export --platform web
 `driver/` juga dikecualikan dari `tsconfig.json` dan ESLint root. Jalankan
 semua perintah driver dari folder `driver/`.
 
+## Rilis pembaruan APK (godiand-app)
+
+APK pelanggan dibangun dari folder `godiand-app/` lewat EAS Build, lalu
+disajikan situs sebagai `public/godiand.apk`. APK baru hanya menimpa APK lama
+bila `android.package` dan tanda tangannya sama.
+
+Prasyarat sekali saja:
+
+```bash
+npm install -g eas-cli
+eas login            # akun Expo pemilik proyek godiand-app
+```
+
+Keystore Android disimpan di akun Expo. Jangan dihapus atau dibuat ulang;
+tanpa keystore yang sama, Android menolak memasang APK sebagai pembaruan.
+`EXPO_PUBLIC_SUPABASE_URL` dan `EXPO_PUBLIC_SUPABASE_ANON_KEY` sudah terdaftar
+untuk environment `preview` di EAS (cek dengan
+`eas env:list --environment preview`). Keduanya memang publik; jangan pernah
+menambah `service_role` atau secret key ke aplikasi. Bila suatu saat
+variabelnya belum ada, tambahkan dengan nilai proyek Supabase:
+
+```bash
+eas env:set --environment preview --name EXPO_PUBLIC_SUPABASE_URL \
+  --value "https://PROYEK.supabase.co" --visibility plaintext
+eas env:set --environment preview --name EXPO_PUBLIC_SUPABASE_ANON_KEY \
+  --value "sb_publishable_..." --visibility plaintext
+```
+
+Langkah rilis:
+
+1. Selesaikan perbaikan dan tes lewat Expo Go (`cd godiand-app && npm start`).
+2. Jalankan `npx expo-doctor` sampai tidak ada error.
+3. Jalankan `npm run build:apk`. Profil `preview` menghasilkan APK internal;
+   `cli.appVersionSource: "remote"` dan `autoIncrement: true` menaikkan
+   versionCode otomatis setiap build.
+4. Unduh APK dari halaman build EAS, lalu ganti namanya menjadi `godiand.apk`.
+5. Taruh di `public/` proyek website (ganti file lama), lalu deploy ulang ke
+   Vercel.
+6. Pasang di HP dan tes: login, beranda, dan fitur yang diperbaiki.
+
+`expo.version` di `godiand-app/app.json` adalah versi yang terlihat pengguna
+(sekarang `1.0.0`). Naikkan untuk perubahan yang terlihat, misalnya fitur atau
+tampilan baru; perbaikan kecil yang tidak terlihat cukup membiarkannya.
+Jangan mengubah `expo.slug` (`godiand-app`) atau `android.package`
+(`com.godiand.app`), karena APK lama tidak akan tertimpa. Catatan:
+`EXPO_PUBLIC_SITE_URL` belum diisi untuk `preview`; tanpa itu tautan Syarat
+dan Privasi memakai `https://godiand.example`.
+
 ## Panel admin (Next.js)
 
 Panel admin memakai login email OTP yang sama dengan situs, lalu mengecek
