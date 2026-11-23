@@ -1,6 +1,6 @@
 import type { IconName } from "./icons";
 import { Icon } from "./icons";
-import { apkFileName, apkHref } from "@/lib/apk";
+import { APK_URL, apkFileName } from "@/lib/apk";
 
 const stores: { name: string; icon: IconName }[] = [
   { name: "App Store", icon: "smartphone" },
@@ -11,7 +11,7 @@ export function HeroStoreButtons({ className = "" }: { className?: string }) {
   return (
     <div className={`flex flex-wrap gap-3 ${className}`}>
       <a
-        href={apkHref}
+        href={APK_URL}
         download={apkFileName}
         className="gd-lift inline-flex min-h-14 items-center gap-3 rounded-xl border-2 border-ink-900 bg-ink-900 px-4 text-white shadow-[4px_4px_0_#0b1c26]"
       >

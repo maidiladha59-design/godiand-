@@ -1,5 +1,5 @@
 import { Icon } from "./icons";
-import { apkFileName, apkHref } from "@/lib/apk";
+import { APK_URL, apkFileName } from "@/lib/apk";
 
 export function ApkDownloadButton({
   className = "",
@@ -8,7 +8,7 @@ export function ApkDownloadButton({
 }) {
   return (
     <a
-      href={apkHref}
+      href={APK_URL}
       download={apkFileName}
       className={`gd-btn gd-btn-primary ${className}`}
     >

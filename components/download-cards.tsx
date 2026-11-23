@@ -1,4 +1,3 @@
-import { apkSizeLabel } from "@/lib/apk";
 import { ApkDownloadButton } from "./apk-download-button";
 import { Logo } from "./Logo";
 import { StoreBadges } from "./store-badges";
@@ -46,12 +45,9 @@ export function DownloadCards() {
           {app.apk ? (
             <>
               <ApkDownloadButton className="mt-6 w-full" />
-              <div className="mt-3 flex flex-wrap items-center justify-center gap-2">
+              <div className="mt-3 flex justify-center">
                 <span className="rounded-full border-2 border-ink-900 bg-sun-300 px-2.5 py-0.5 text-[11px] font-extrabold text-ink-900">
                   Versi uji coba
-                </span>
-                <span className="text-xs font-semibold text-ink-500">
-                  {apkSizeLabel}
                 </span>
               </div>
             </>

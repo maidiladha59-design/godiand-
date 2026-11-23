@@ -1,6 +1,6 @@
 import { DownloadCards } from "@/components/download-cards";
 import { Icon } from "@/components/icons";
-import { apkFileName, apkHref } from "@/lib/apk";
+import { APK_URL, apkFileName } from "@/lib/apk";
 
 export function DownloadSection() {
   return (
@@ -26,7 +26,7 @@ export function DownloadSection() {
 
         <div className="mt-8 flex justify-center">
           <a
-            href={apkHref}
+            href={APK_URL}
             download={apkFileName}
             className="inline-flex items-center gap-2 text-[15px] font-extrabold text-brand-800 underline decoration-2 underline-offset-4 hover:text-brand-950"
           >

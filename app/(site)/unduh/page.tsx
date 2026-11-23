@@ -4,7 +4,6 @@ import { ApkDownloadButton } from "@/components/apk-download-button";
 import { DownloadCards } from "@/components/download-cards";
 import { Icon } from "@/components/icons";
 import { PageHero } from "@/components/page-hero";
-import { apkSizeLabel } from "@/lib/apk";
 
 export const metadata: Metadata = {
   title: "Unduh aplikasi",
@@ -57,10 +56,7 @@ export default function UnduhPage() {
                   dikenal.
                 </p>
                 <p className="mt-3 text-sm font-semibold text-ink-600">
-                  Ukuran file:{" "}
-                  <span className="font-extrabold text-ink-900">
-                    {apkSizeLabel}
-                  </span>
+                  Versi uji coba
                 </p>
                 <div className="mt-6 flex flex-wrap gap-3">
                   <ApkDownloadButton />
