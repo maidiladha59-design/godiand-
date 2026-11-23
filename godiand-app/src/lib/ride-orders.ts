@@ -32,7 +32,6 @@ export type NewRideOrderInput = {
   pickup: Coordinates;
   dropoffAddress: string;
   dropoff: Coordinates;
-  distanceKm: number;
   paymentMethod: PaymentMethod;
 };
 
@@ -119,9 +118,9 @@ function toFriendlyError(message: string | undefined, fallback: string): Error {
 export async function fetchRideFare(distanceKm: number): Promise<number> {
   const client = requireClient();
 
-  const { data, error } = await client.rpc("calculate_fare", {
-    p_service_type: "ride",
-    p_distance_km: distanceKm,
+  const { data, error } = await client.rpc("hitung_tarif", {
+    p_layanan: "ride",
+    p_jarak_km: distanceKm,
   });
 
   if (error) {
@@ -142,15 +141,15 @@ export async function createRideOrder(
 ): Promise<RideOrder> {
   const client = requireClient();
 
-  const { data, error } = await client.rpc("create_ride_order", {
-    p_pickup_address: input.pickupAddress,
-    p_dropoff_address: input.dropoffAddress,
-    p_pickup_latitude: input.pickup.latitude,
-    p_pickup_longitude: input.pickup.longitude,
-    p_dropoff_latitude: input.dropoff.latitude,
-    p_dropoff_longitude: input.dropoff.longitude,
-    p_distance_km: input.distanceKm,
-    p_payment_method: input.paymentMethod,
+  const { data, error } = await client.rpc("buat_pesanan", {
+    p_layanan: "ride",
+    p_jemput_nama: input.pickupAddress,
+    p_jemput_lat: input.pickup.latitude,
+    p_jemput_lng: input.pickup.longitude,
+    p_tujuan_nama: input.dropoffAddress,
+    p_tujuan_lat: input.dropoff.latitude,
+    p_tujuan_lng: input.dropoff.longitude,
+    p_metode_bayar: input.paymentMethod === "cash" ? "tunai" : "qris",
   });
 
   if (error) {

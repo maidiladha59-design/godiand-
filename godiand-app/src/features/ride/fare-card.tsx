@@ -88,14 +88,13 @@ export function RideFareCard({
 
     try {
       const order = await createRideOrder({
-        pickupAddress: pickup.address ?? pickup.name,
+        pickupAddress: pickup.name,
         pickup: { latitude: pickup.latitude, longitude: pickup.longitude },
-        dropoffAddress: destination.address ?? destination.name,
+        dropoffAddress: destination.name,
         dropoff: {
           latitude: destination.latitude,
           longitude: destination.longitude,
         },
-        distanceKm: fareState.distance,
         paymentMethod: payment,
       });
 
