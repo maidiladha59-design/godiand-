@@ -206,6 +206,7 @@ export async function fetchMyRideOrders(): Promise<RideOrderSummary[]> {
   const { data, error } = await client
     .from("orders")
     .select(ORDER_COLUMNS)
+    .eq("service_type", "ride")
     .order("created_at", { ascending: false })
     .limit(50);
 

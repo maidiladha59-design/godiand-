@@ -210,9 +210,24 @@ export function AktivitasScreen() {
             const tone = badgeTones[order.status];
 
             return (
-              <View
+              <Pressable
+                accessibilityHint="Membuka detail pesanan"
+                accessibilityLabel={`Buka pesanan ke ${
+                  order.dropoff_address ?? "tujuan"
+                }`}
+                accessibilityRole="button"
                 key={order.id}
-                style={[styles.row, index > 0 && styles.rowDivider]}
+                onPress={() => {
+                  router.push({
+                    pathname: "/ride/mencari",
+                    params: { id: order.id },
+                  });
+                }}
+                style={({ pressed }) => [
+                  styles.row,
+                  index > 0 && styles.rowDivider,
+                  pressed && styles.rowPressed,
+                ]}
               >
                 <View style={styles.rowHead}>
                   <View
@@ -251,24 +266,12 @@ export function AktivitasScreen() {
                   </Text>
                 </View>
 
-                {isRunningRideStatus(order.status) ? (
-                  <Pressable
-                    accessibilityRole="link"
-                    onPress={() => {
-                      router.push({
-                        pathname: "/ride/mencari",
-                        params: { id: order.id },
-                      });
-                    }}
-                    style={({ pressed }) => [
-                      styles.track,
-                      pressed && styles.trackPressed,
-                    ]}
-                  >
-                    <Text style={styles.trackText}>Lacak pesanan →</Text>
-                  </Pressable>
-                ) : null}
-              </View>
+                <Text style={styles.trackText}>
+                  {isRunningRideStatus(order.status)
+                    ? "Lacak pesanan →"
+                    : "Lihat detail →"}
+                </Text>
+              </Pressable>
             );
           })}
         </Card>
@@ -397,6 +400,9 @@ const styles = StyleSheet.create({
     borderTopWidth: 2,
     borderTopColor: colors.brand100,
   },
+  rowPressed: {
+    backgroundColor: colors.sun50,
+  },
   rowHead: {
     flexDirection: "row",
     alignItems: "center",
@@ -471,12 +477,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "900",
     letterSpacing: -0.2,
-  },
-  track: {
-    alignSelf: "flex-start",
-  },
-  trackPressed: {
-    opacity: 0.7,
   },
   trackText: {
     color: colors.brand700,
